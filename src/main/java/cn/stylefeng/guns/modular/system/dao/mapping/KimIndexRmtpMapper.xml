@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.system.dao.KimIndexRmtpMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.system.model.KimIndexRmtp">
+        <id column="guid" property="guid" />
+        <result column="rm_name" property="rmName" />
+        <result column="rm_image" property="rmImage" />
+        <result column="rm_head_img" property="rmHeadImg" />
+        <result column="rm_title" property="rmTitle" />
+        <result column="rm_context" property="rmContext" />
+        <result column="rm_sort" property="rmSort" />
+        <result column="nt" property="nt" />
+        <result column="ts" property="ts" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        guid, rm_name, rm_image, rm_head_img, rm_title, rm_context, rm_sort, nt, ts
+    </sql>
+
+</mapper>

@@ -1,0 +1,34 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="guid" name="主键自增" value="${item.guid}" underline="true"/>
+                            <#input id="rmName" name="热门名称" value="${item.rmName}" underline="true"/>
+                            <#input id="rmImage" name="热门图片id(与资源信息主键匹配)" value="${item.rmImage}" underline="true"/>
+                            <#input id="rmHeadImg" name="头像图片id(与资源信息主键匹配)" value="${item.rmHeadImg}" underline="true"/>
+                            <#input id="rmTitle" name="标题" value="${item.rmTitle}" />
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="rmContext" name="内容" value="${item.rmContext}" underline="true"/>
+                            <#input id="rmSort" name="排序" value="${item.rmSort}" underline="true"/>
+                            <#input id="nt" name="备注" value="${item.nt}" underline="true"/>
+                            <#input id="ts" name="时间戳" value="${item.ts}" />
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="KimIndexRmtpInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="KimIndexRmtpInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/kim/kimIndexRmtp/kimIndexRmtp_info.js"></script>
+@}

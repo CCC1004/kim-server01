@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.system.dao.KimIndexLbMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.system.model.KimIndexLb">
+        <id column="guid" property="guid" />
+        <result column="lb_name" property="lbName" />
+        <result column="lb_image" property="lbImage" />
+        <result column="lb_sort" property="lbSort" />
+        <result column="nt" property="nt" />
+        <result column="ts" property="ts" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        guid, lb_name, lb_image, lb_sort, nt, ts
+    </sql>
+
+</mapper>
