@@ -47,7 +47,7 @@ public class KimIndexRmtpController extends BaseController {
      * 跳转到修改热门图片
      */
     @RequestMapping("/kimIndexRmtp_update/{kimIndexRmtpId}")
-    public String kimIndexRmtpUpdate(@PathVariable Integer kimIndexRmtpId, Model model) {
+    public String kimIndexRmtpUpdate(@PathVariable String kimIndexRmtpId, Model model) {
         KimIndexRmtp kimIndexRmtp = kimIndexRmtpService.selectById(kimIndexRmtpId);
         model.addAttribute("item",kimIndexRmtp);
         LogObjectHolder.me().set(kimIndexRmtp);
@@ -78,7 +78,7 @@ public class KimIndexRmtpController extends BaseController {
      */
     @RequestMapping(value = "/delete")
     @ResponseBody
-    public Object delete(@RequestParam Integer kimIndexRmtpId) {
+    public Object delete(@RequestParam String kimIndexRmtpId) {
         kimIndexRmtpService.deleteById(kimIndexRmtpId);
         return SUCCESS_TIP;
     }
@@ -98,7 +98,7 @@ public class KimIndexRmtpController extends BaseController {
      */
     @RequestMapping(value = "/detail/{kimIndexRmtpId}")
     @ResponseBody
-    public Object detail(@PathVariable("kimIndexRmtpId") Integer kimIndexRmtpId) {
+    public Object detail(@PathVariable("kimIndexRmtpId") String kimIndexRmtpId) {
         return kimIndexRmtpService.selectById(kimIndexRmtpId);
     }
 }

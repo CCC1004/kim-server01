@@ -47,7 +47,7 @@ public class KimIndexLbController extends BaseController {
      * 跳转到修改轮播图
      */
     @RequestMapping("/kimIndexLb_update/{kimIndexLbId}")
-    public String kimIndexLbUpdate(@PathVariable Integer kimIndexLbId, Model model) {
+    public String kimIndexLbUpdate(@PathVariable String kimIndexLbId, Model model) {
         KimIndexLb kimIndexLb = kimIndexLbService.selectById(kimIndexLbId);
         model.addAttribute("item",kimIndexLb);
         LogObjectHolder.me().set(kimIndexLb);
@@ -78,7 +78,7 @@ public class KimIndexLbController extends BaseController {
      */
     @RequestMapping(value = "/delete")
     @ResponseBody
-    public Object delete(@RequestParam Integer kimIndexLbId) {
+    public Object delete(@RequestParam String kimIndexLbId) {
         kimIndexLbService.deleteById(kimIndexLbId);
         return SUCCESS_TIP;
     }
@@ -98,7 +98,7 @@ public class KimIndexLbController extends BaseController {
      */
     @RequestMapping(value = "/detail/{kimIndexLbId}")
     @ResponseBody
-    public Object detail(@PathVariable("kimIndexLbId") Integer kimIndexLbId) {
+    public Object detail(@PathVariable("kimIndexLbId") String kimIndexLbId) {
         return kimIndexLbService.selectById(kimIndexLbId);
     }
 }

@@ -65,7 +65,7 @@ KimIndexJptj.openKimIndexJptjDetail = function () {
             area: ['800px', '420px'], //宽高
             fix: false, //不固定
             maxmin: true,
-            content: Feng.ctxPath + '/kimIndexJptj/kimIndexJptj_update/' + KimIndexJptj.seItem.id
+            content: Feng.ctxPath + '/kimIndexJptj/kimIndexJptj_update/' + KimIndexJptj.seItem.guid
         });
         this.layerIndex = index;
     }
@@ -82,7 +82,7 @@ KimIndexJptj.delete = function () {
         }, function (data) {
             Feng.error("删除失败!" + data.responseJSON.message + "!");
         });
-        ajax.set("kimIndexJptjId",this.seItem.id);
+        ajax.set("kimIndexJptjId",this.seItem.guid);
         ajax.start();
     }
 };

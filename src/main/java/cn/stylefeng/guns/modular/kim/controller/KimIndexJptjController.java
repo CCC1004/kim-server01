@@ -6,6 +6,9 @@ import cn.stylefeng.guns.modular.system.model.KimResources;
 import cn.stylefeng.guns.modular.system.service.IKimResourcesService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.ui.Model;
@@ -59,7 +62,7 @@ public class KimIndexJptjController extends BaseController {
      * 跳转到修改精品推荐
      */
     @RequestMapping("/kimIndexJptj_update/{kimIndexJptjId}")
-    public String kimIndexJptjUpdate(@PathVariable Integer kimIndexJptjId, Model model) {
+    public String kimIndexJptjUpdate(@PathVariable String kimIndexJptjId, Model model) {
         KimIndexJptj kimIndexJptj = kimIndexJptjService.selectById(kimIndexJptjId);
         model.addAttribute("item",kimIndexJptj);
         LogObjectHolder.me().set(kimIndexJptj);
@@ -89,8 +92,9 @@ public class KimIndexJptjController extends BaseController {
      * 新增精品推荐+上传图片
      */
     @RequestMapping(value = "/addJptj")
-    @ResponseBody
-    public Object addJptjAndUpload(@RequestParam("file") MultipartFile file,
+//    @ResponseBody
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT)
+    public String addJptjAndUpload(@RequestParam("file") MultipartFile file,
                                    HttpServletRequest request,
                                    KimIndexJptj kimIndexJptj){
         /*
@@ -125,7 +129,8 @@ public class KimIndexJptjController extends BaseController {
         kimIndexJptj.setJpImage(kimResources.getFileCd());
         kimIndexJptjService.insert(kimIndexJptj);
 
-        return SUCCESS_TIP;
+//        return SUCCESS_TIP;
+        return PREFIX + "kimIndexJptj_add2.html";
     }
 
 
@@ -134,7 +139,7 @@ public class KimIndexJptjController extends BaseController {
      */
     @RequestMapping(value = "/delete")
     @ResponseBody
-    public Object delete(@RequestParam Integer kimIndexJptjId) {
+    public Object delete(@RequestParam String kimIndexJptjId) {
         kimIndexJptjService.deleteById(kimIndexJptjId);
         return SUCCESS_TIP;
     }
@@ -154,7 +159,7 @@ public class KimIndexJptjController extends BaseController {
      */
     @RequestMapping(value = "/detail/{kimIndexJptjId}")
     @ResponseBody
-    public Object detail(@PathVariable("kimIndexJptjId") Integer kimIndexJptjId) {
+    public Object detail(@PathVariable("kimIndexJptjId") String kimIndexJptjId) {
         return kimIndexJptjService.selectById(kimIndexJptjId);
     }
 }

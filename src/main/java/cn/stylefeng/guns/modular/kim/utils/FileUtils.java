@@ -1,6 +1,5 @@
 package cn.stylefeng.guns.modular.kim.utils;
 
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +29,7 @@ public class FileUtils {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String dateStr = format.format(new Date()).replace("-", "");
         //设置文件需要上传到的路径
-        String pathStr = "/upload/kim/" + dateStr;
+        String pathStr = "/upload/kim/" + dateStr + "/";
         //文件存放路径
         String filePath = request.getSession().getServletContext().getRealPath(pathStr) ;
 
@@ -41,7 +40,7 @@ public class FileUtils {
         }
 
         // 返回图片的存放路径
-        return filePath;
+        return pathStr + fileName;
     }
 
     /**
