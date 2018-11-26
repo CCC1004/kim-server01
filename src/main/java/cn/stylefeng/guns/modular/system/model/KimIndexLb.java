@@ -30,6 +30,8 @@ public class KimIndexLb extends Model<KimIndexLb> {
     private String lbName;
     /**
      * 轮播图片id(与资源信息主键匹配)
+     *      kim_index_jptj表中有一个lb_image字段，所以在KimIndexJptj类中定义一个kimResources属性，
+     *      用于维护KimIndexJptj和KimResources之间的一对一关系，
      */
     @TableField("lb_image")
     private String lbImage;
@@ -39,6 +41,11 @@ public class KimIndexLb extends Model<KimIndexLb> {
     @TableField("lb_sort")
     private String lbSort;
     /**
+     * 状态/是否显示（1显示；2不显示）
+     */
+    @TableField("lb_status")
+    private String lbStatus;
+    /**
      * 备注
      */
     private String nt;
@@ -47,6 +54,13 @@ public class KimIndexLb extends Model<KimIndexLb> {
      */
     private Date ts;
 
+    public String getLbStatus() {
+        return lbStatus;
+    }
+
+    public void setLbStatus(String lbStatus) {
+        this.lbStatus = lbStatus;
+    }
 
     public String getGuid() {
         return guid;
@@ -104,12 +118,13 @@ public class KimIndexLb extends Model<KimIndexLb> {
     @Override
     public String toString() {
         return "KimIndexLb{" +
-        ", guid=" + guid +
-        ", lbName=" + lbName +
-        ", lbImage=" + lbImage +
-        ", lbSort=" + lbSort +
-        ", nt=" + nt +
-        ", ts=" + ts +
-        "}";
+                "guid='" + guid + '\'' +
+                ", lbName='" + lbName + '\'' +
+                ", lbImage='" + lbImage + '\'' +
+                ", lbSort='" + lbSort + '\'' +
+                ", lbStatus='" + lbStatus + '\'' +
+                ", nt='" + nt + '\'' +
+                ", ts=" + ts +
+                '}';
     }
 }

@@ -50,6 +50,7 @@ KimIndexJptjInfoDlg.collectData = function() {
     .set('jpImage')
     .set('jpDesc')
     .set('jpSort')
+    .set('jpStatus')
     .set('nt')
     .set('ts');
 }
@@ -63,7 +64,8 @@ KimIndexJptjInfoDlg.addSubmit = function() {
     this.collectData();
 
     //提交信息
-    var ajax = new $ax(Feng.ctxPath + "/kimIndexJptj/add", function(data){
+    // var ajax = new $ax(Feng.ctxPath + "/kimIndexJptj/add", function(data){
+    var ajax = new $ax(Feng.ctxPath + "/kimIndexJptj/addJptj", function(data){
         Feng.success("添加成功!");
         window.parent.KimIndexJptj.table.refresh();
         KimIndexJptjInfoDlg.close();
@@ -73,6 +75,21 @@ KimIndexJptjInfoDlg.addSubmit = function() {
     ajax.set(this.kimIndexJptjInfoData);
     ajax.start();
 }
+
+/**
+ * 添加精品图片
+ */
+$("#fileSubmit").click(function(){
+
+    this.clearData();
+    this.collectData();
+
+    if($.browser.msie){
+        window.uploadForm.submit();
+    }else{
+        $("#uploadForm").submit();
+    }
+});
 
 /**
  * 提交修改

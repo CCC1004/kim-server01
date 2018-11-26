@@ -1,5 +1,9 @@
 package cn.stylefeng.guns.modular.kim.controller;
 
+import cn.stylefeng.guns.modular.kim.utils.FileUtils;
+import cn.stylefeng.guns.modular.kim.utils.GuidUtils;
+import cn.stylefeng.guns.modular.system.model.KimResources;
+import cn.stylefeng.guns.modular.system.service.IKimResourcesService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +15,9 @@ import cn.stylefeng.guns.core.log.LogObjectHolder;
 import org.springframework.web.bind.annotation.RequestParam;
 import cn.stylefeng.guns.modular.system.model.KimIndexJptj;
 import cn.stylefeng.guns.modular.kim.service.IKimIndexJptjService;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 精品推荐控制器
@@ -27,6 +34,10 @@ public class KimIndexJptjController extends BaseController {
     @Autowired
     private IKimIndexJptjService kimIndexJptjService;
 
+    @Autowired
+    private IKimResourcesService kimResourcesService;
+
+
     /**
      * 跳转到精品推荐首页
      */
@@ -40,7 +51,8 @@ public class KimIndexJptjController extends BaseController {
      */
     @RequestMapping("/kimIndexJptj_add")
     public String kimIndexJptjAdd() {
-        return PREFIX + "kimIndexJptj_add.html";
+//        return PREFIX + "kimIndexJptj_add.html";
+        return PREFIX + "kimIndexJptj_add2.html";
     }
 
     /**
@@ -72,6 +84,50 @@ public class KimIndexJptjController extends BaseController {
         kimIndexJptjService.insert(kimIndexJptj);
         return SUCCESS_TIP;
     }
+
+    /**
+     * 新增精品推荐+上传图片
+     */
+    @RequestMapping(value = "/addJptj")
+    @ResponseBody
+    public Object addJptjAndUpload(@RequestParam("file") MultipartFile file,
+                                   HttpServletRequest request,
+                                   KimIndexJptj kimIndexJptj){
+        /*
+            上传图片
+         */
+        String filePath = FileUtils.singleUpload(file, request);
+
+        /*
+            保存文件至数据库
+         */
+        KimResources kimResources = new KimResources();
+        kimResources.setFileCd(GuidUtils.getGuid());
+        //图片名字
+        String fileName = file.getOriginalFilename();
+        kimResources.setFileNm(fileName);
+        //资源类型，图片为2
+        kimResources.setMulTp("2");
+
+        //图片类型
+        String contentType = file.getContentType();
+        kimResources.setFileExt(contentType);
+        kimResources.setFilePath(filePath);
+        kimResources.setTs(GuidUtils.getCreateTime());
+        kimResourcesService.insert(kimResources);
+
+        /*
+          保存精品推荐信息
+         */
+        kimIndexJptj.setGuid(GuidUtils.getGuid());
+        kimIndexJptj.setTs(GuidUtils.getCreateTime());
+        //设置图片资源guid
+        kimIndexJptj.setJpImage(kimResources.getFileCd());
+        kimIndexJptjService.insert(kimIndexJptj);
+
+        return SUCCESS_TIP;
+    }
+
 
     /**
      * 删除精品推荐

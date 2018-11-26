@@ -11,13 +11,14 @@
         <result column="rm_title" property="rmTitle" />
         <result column="rm_context" property="rmContext" />
         <result column="rm_sort" property="rmSort" />
+        <result column="rm_status" property="rmStatus" />
         <result column="nt" property="nt" />
         <result column="ts" property="ts" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        guid, rm_name, rm_image, rm_head_img, rm_title, rm_context, rm_sort, nt, ts
+        guid, rm_name, rm_image, rm_head_img, rm_title, rm_context, rm_sort, rm_status, nt, ts
     </sql>
 
 </mapper>

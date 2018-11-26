@@ -29,11 +29,25 @@ spring:
       max-request-size: 100MB
       max-file-size: 100MB
 
+############################################################
+# thymeleaf 静态资源配置
+############################################################
+#  thymeleaf:
+#    prefix: classpath:/templates/
+#    suffix: .html
+#    mode: HTML5
+#    encoding: UTF-8
+#    servlet:
+#      content-type: text/html
+#    # 关闭缓存, 即时刷新, 上线生产环境需要改为true
+#    cache: false
+
 mybatis-plus:
   typeAliasesPackage: cn.stylefeng.guns.modular.system.model
 
 log:
   path: guns-logs
+
 
 ---
 

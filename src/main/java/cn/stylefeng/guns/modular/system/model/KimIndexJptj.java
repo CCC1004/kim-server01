@@ -44,6 +44,11 @@ public class KimIndexJptj extends Model<KimIndexJptj> {
     @TableField("jp_sort")
     private String jpSort;
     /**
+     * 状态/是否显示（1显示；2不显示）
+     */
+    @TableField("jp_status")
+    private String jpStatus;
+    /**
      * 备注
      */
     private String nt;
@@ -52,6 +57,13 @@ public class KimIndexJptj extends Model<KimIndexJptj> {
      */
     private Date ts;
 
+    public String getJpStatus() {
+        return jpStatus;
+    }
+
+    public void setJpStatus(String jpStatus) {
+        this.jpStatus = jpStatus;
+    }
 
     public String getGuid() {
         return guid;
@@ -117,13 +129,14 @@ public class KimIndexJptj extends Model<KimIndexJptj> {
     @Override
     public String toString() {
         return "KimIndexJptj{" +
-        ", guid=" + guid +
-        ", jpName=" + jpName +
-        ", jpImage=" + jpImage +
-        ", jpDesc=" + jpDesc +
-        ", jpSort=" + jpSort +
-        ", nt=" + nt +
-        ", ts=" + ts +
-        "}";
+                "guid='" + guid + '\'' +
+                ", jpName='" + jpName + '\'' +
+                ", jpImage='" + jpImage + '\'' +
+                ", jpDesc='" + jpDesc + '\'' +
+                ", jpSort='" + jpSort + '\'' +
+                ", jpStatus='" + jpStatus + '\'' +
+                ", nt='" + nt + '\'' +
+                ", ts=" + ts +
+                '}';
     }
 }

@@ -19,6 +19,7 @@ KimIndexJptj.initColumn = function () {
             {title: '精品图片id', field: 'jpImage', visible: false, align: 'center', valign: 'middle'},
             {title: '精品描述', field: 'jpDesc', visible: true, align: 'center', valign: 'middle'},
             {title: '排序', field: 'jpSort', visible: true, align: 'center', valign: 'middle'},
+            {title: '是否显示', field: 'jpStatus', visible: true, align: 'center', valign: 'middle'},
             {title: '备注', field: 'nt', visible: true, align: 'center', valign: 'middle'},
             {title: '时间戳', field: 'ts', visible: false, align: 'center', valign: 'middle'}
     ];

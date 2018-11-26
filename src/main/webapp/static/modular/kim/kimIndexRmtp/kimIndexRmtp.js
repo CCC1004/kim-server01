@@ -21,6 +21,7 @@ KimIndexRmtp.initColumn = function () {
             {title: '标题', field: 'rmTitle', visible: true, align: 'center', valign: 'middle'},
             {title: '内容', field: 'rmContext', visible: true, align: 'center', valign: 'middle'},
             {title: '排序', field: 'rmSort', visible: true, align: 'center', valign: 'middle'},
+            {title: '是否显示', field: 'rmStatus', visible: true, align: 'center', valign: 'middle'},
             {title: '备注', field: 'nt', visible: true, align: 'center', valign: 'middle'},
             {title: '时间戳', field: 'ts', visible: true, align: 'center', valign: 'middle'}
     ];

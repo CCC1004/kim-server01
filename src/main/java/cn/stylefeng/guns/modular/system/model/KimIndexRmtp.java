@@ -54,6 +54,11 @@ public class KimIndexRmtp extends Model<KimIndexRmtp> {
     @TableField("rm_sort")
     private String rmSort;
     /**
+     * 状态/是否显示（1显示；2不显示）
+     */
+    @TableField("rm_status")
+    private String rmStatus;
+    /**
      * 备注
      */
     private String nt;
@@ -62,6 +67,14 @@ public class KimIndexRmtp extends Model<KimIndexRmtp> {
      */
     private Date ts;
 
+
+    public String getRmStatus() {
+        return rmStatus;
+    }
+
+    public void setRmStatus(String rmStatus) {
+        this.rmStatus = rmStatus;
+    }
 
     public String getGuid() {
         return guid;
@@ -143,15 +156,16 @@ public class KimIndexRmtp extends Model<KimIndexRmtp> {
     @Override
     public String toString() {
         return "KimIndexRmtp{" +
-        ", guid=" + guid +
-        ", rmName=" + rmName +
-        ", rmImage=" + rmImage +
-        ", rmHeadImg=" + rmHeadImg +
-        ", rmTitle=" + rmTitle +
-        ", rmContext=" + rmContext +
-        ", rmSort=" + rmSort +
-        ", nt=" + nt +
-        ", ts=" + ts +
-        "}";
+                "guid='" + guid + '\'' +
+                ", rmName='" + rmName + '\'' +
+                ", rmImage='" + rmImage + '\'' +
+                ", rmHeadImg='" + rmHeadImg + '\'' +
+                ", rmTitle='" + rmTitle + '\'' +
+                ", rmContext='" + rmContext + '\'' +
+                ", rmSort='" + rmSort + '\'' +
+                ", rmStatus='" + rmStatus + '\'' +
+                ", nt='" + nt + '\'' +
+                ", ts=" + ts +
+                '}';
     }
 }

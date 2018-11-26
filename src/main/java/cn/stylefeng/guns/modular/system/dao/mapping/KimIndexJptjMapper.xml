@@ -9,13 +9,14 @@
         <result column="jp_image" property="jpImage" />
         <result column="jp_desc" property="jpDesc" />
         <result column="jp_sort" property="jpSort" />
+        <result column="jp_status" property="jpStatus" />
         <result column="nt" property="nt" />
         <result column="ts" property="ts" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        guid, jp_name, jp_image, jp_desc, jp_sort, nt, ts
+        guid, jp_name, jp_image, jp_desc, jp_sort, jp_status, nt, ts
     </sql>
 
 </mapper>

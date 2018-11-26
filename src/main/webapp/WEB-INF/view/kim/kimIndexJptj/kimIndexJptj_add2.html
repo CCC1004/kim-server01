@@ -1,0 +1,45 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+
+        <form action="/kimIndexJptj/addJptj" id="uploadForm" method="post" enctype="multipart/form-data">
+            <div class="form-horizontal">
+
+                <div class="row">
+                    <div class="col-sm-6 b-r">
+                        <#input id="jpName" name="精品名称" underline="true"/>
+                        <#uploadImg id="jpImage" name="精品图片" underline="true" />
+                        <#input id="jpDesc" name="精品描述"/>
+                    </div>
+
+
+                    <div class="col-sm-6">
+                        <#input id="jpSort" name="排序" underline="true"/>
+                        <#select id="jpStatus" name="是否显示" underline="true">
+                            <option value="1">显示</option>
+                            <option value="2">不显示</option>
+                        </#select>
+                        <#input id="nt" name="备注" underline="true"/>
+                </div>
+
+                <div class="progress progress-striped" id="progressTipArea" style="margin-top: 20px;">
+                    <div id="progressBar" style="width: 0%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" role="progressbar" class="progress-bar progress-bar-info">
+                    </div>
+                </div>
+
+                <div class="row btn-group-m-t">
+                    <div class="col-sm-10">
+                        <input type="submit" class="btn btn-success" id="fileSubmit" name="Submit" value="上传" />
+                        <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="KimIndexJptjInfoDlg.close()"/>
+                    </div>
+                </div>
+
+
+            </div>
+        </form>
+    </div>
+
+</div>
+</div>
+<script src="${ctxPath}/static/modular/kim/kimIndexJptj/kimIndexJptj_info.js"></script>
+@}

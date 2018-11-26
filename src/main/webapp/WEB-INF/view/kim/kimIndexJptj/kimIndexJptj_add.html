@@ -10,11 +10,16 @@
                     <#input id="jpName" name="精品名称" underline="true"/>
                     <!--<#input id="jpImage" name="精品图片id" underline="true"/>-->
                     <#avatar id="jpImage" name="精品图片" underline="true"/>
+                    <#input id="jpDesc" name="精品描述"/>
                 </div>
 
+
                 <div class="col-sm-6">
-                    <#input id="jpDesc" name="精品描述"/>
                     <#input id="jpSort" name="排序" underline="true"/>
+                    <#select id="jpStatus" name="是否显示" underline="true">
+                        <option value="1">显示</option>
+                        <option value="2">不显示</option>
+                    </#select>
                     <#input id="nt" name="备注" underline="true"/>
                     <!--<#input id="ts" name="时间戳" underline="true"/>-->
                 </div>

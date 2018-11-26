@@ -49,6 +49,7 @@ KimIndexLbInfoDlg.collectData = function() {
     .set('lbName')
     .set('lbImage')
     .set('lbSort')
+    .set('lbStatus')
     .set('nt')
     .set('ts');
 }

@@ -52,6 +52,7 @@ KimIndexRmtpInfoDlg.collectData = function() {
     .set('rmTitle')
     .set('rmContext')
     .set('rmSort')
+    .set('rmStatus')
     .set('nt')
     .set('ts');
 }

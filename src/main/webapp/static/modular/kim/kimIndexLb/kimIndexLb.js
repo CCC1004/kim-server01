@@ -18,6 +18,7 @@ KimIndexLb.initColumn = function () {
             {title: '轮播页名称', field: 'lbName', visible: true, align: 'center', valign: 'middle'},
             {title: '轮播图片id(与资源信息主键匹配)', field: 'lbImage', visible: true, align: 'center', valign: 'middle'},
             {title: '排序', field: 'lbSort', visible: true, align: 'center', valign: 'middle'},
+            {title: '是否显示', field: 'lbStatus', visible: true, align: 'center', valign: 'middle'},
             {title: '备注', field: 'nt', visible: true, align: 'center', valign: 'middle'},
             {title: '时间戳', field: 'ts', visible: true, align: 'center', valign: 'middle'}
     ];
