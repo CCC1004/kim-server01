@@ -1,5 +1,5 @@
 server:
-  port: 8088
+  port: 8064
 
 guns:
   swagger-open: true              #是否开启swagger (true/false)
@@ -23,7 +23,7 @@ spring:
     restart:
       enabled: true
       additional-paths: src/main/java
-      exclude: static/**,WEB-INF/view/**
+      exclude: static/**,WEB-INF/view/**,upload/**
   servlet:
     multipart:
       max-request-size: 100MB

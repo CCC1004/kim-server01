@@ -18,4 +18,17 @@
         guid, lb_name, lb_image, lb_sort, lb_status, nt, ts
     </sql>
 
+    <!-- map查询结果列 -->
+    <sql id="Base_Column_List2">
+        l.guid as guid, l.lb_name as lbName, l.lb_image as lbImage, r.FILE_PATH as filePath
+    </sql>
+
+    <select id="getLbList" resultType="map">
+        select
+        <include refid="Base_Column_List2" />
+        from kim_index_lb l join kim_resources r
+        on l.lb_image=r.FILE_CD
+        order by l.lb_sort asc
+    </select>
+
 </mapper>

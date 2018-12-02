@@ -1,7 +1,6 @@
 package cn.stylefeng.guns.modular.kim.controller;
 
 import cn.stylefeng.guns.modular.kim.utils.FileUtils;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,7 +28,7 @@ public class FileUploadController {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String dateStr = format.format(new Date()).replace("-", "");
         //设置文件需要上传到的路径
-        String pathStr = "/upload/kim" + dateStr;
+        String pathStr = "/static/upload/kim" + dateStr;
         //文件存放路径
         String filePath = request.getSession().getServletContext().getRealPath(pathStr) ;
 

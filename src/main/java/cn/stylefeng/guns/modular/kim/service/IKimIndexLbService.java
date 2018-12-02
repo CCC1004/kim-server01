@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface IKimIndexLbService extends IService<KimIndexLb> {
 
+    boolean deleteLbAndRes(String kimIndexLbId);
 }

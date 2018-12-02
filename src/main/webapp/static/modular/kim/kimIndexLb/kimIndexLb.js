@@ -14,9 +14,9 @@ var KimIndexLb = {
 KimIndexLb.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-            {title: '主键自增', field: 'guid', visible: true, align: 'center', valign: 'middle'},
+            {title: '主键自增', field: 'guid', visible: false, align: 'center', valign: 'middle'},
             {title: '轮播页名称', field: 'lbName', visible: true, align: 'center', valign: 'middle'},
-            {title: '轮播图片id(与资源信息主键匹配)', field: 'lbImage', visible: true, align: 'center', valign: 'middle'},
+            {title: '轮播图片id', field: 'lbImage', visible: true, align: 'center', valign: 'middle'},
             {title: '排序', field: 'lbSort', visible: true, align: 'center', valign: 'middle'},
             {title: '是否显示', field: 'lbStatus', visible: true, align: 'center', valign: 'middle'},
             {title: '备注', field: 'nt', visible: true, align: 'center', valign: 'middle'},
@@ -64,7 +64,7 @@ KimIndexLb.openKimIndexLbDetail = function () {
             area: ['800px', '420px'], //宽高
             fix: false, //不固定
             maxmin: true,
-            content: Feng.ctxPath + '/kimIndexLb/kimIndexLb_update/' + KimIndexLb.seItem.id
+            content: Feng.ctxPath + '/kimIndexLb/kimIndexLb_update/' + KimIndexLb.seItem.guid
         });
         this.layerIndex = index;
     }
@@ -75,14 +75,17 @@ KimIndexLb.openKimIndexLbDetail = function () {
  */
 KimIndexLb.delete = function () {
     if (this.check()) {
-        var ajax = new $ax(Feng.ctxPath + "/kimIndexLb/delete", function (data) {
-            Feng.success("删除成功!");
-            KimIndexLb.table.refresh();
-        }, function (data) {
-            Feng.error("删除失败!" + data.responseJSON.message + "!");
-        });
-        ajax.set("kimIndexLbId",this.seItem.id);
-        ajax.start();
+        var operation = function(){
+            var ajax = new $ax(Feng.ctxPath + "/kimIndexLb/delete", function (data) {
+                Feng.success("删除成功!");
+                KimIndexLb.table.refresh();
+            }, function (data) {
+                Feng.error("删除失败!" + data.responseJSON.message + "!");
+            });
+            ajax.set("kimIndexLbId",KimIndexLb.seItem.guid);
+            ajax.start();
+        }
+        Feng.confirm("是否刪除?", operation);
     }
 };
 

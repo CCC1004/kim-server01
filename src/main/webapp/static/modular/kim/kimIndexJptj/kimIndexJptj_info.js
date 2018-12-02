@@ -38,6 +38,8 @@ KimIndexJptjInfoDlg.get = function(key) {
  */
 KimIndexJptjInfoDlg.close = function() {
     parent.layer.close(window.parent.KimIndexJptj.layerIndex);
+    //刷新列表
+    window.parent.KimIndexJptj.table.refresh();
 }
 
 /**
@@ -113,9 +115,5 @@ KimIndexJptjInfoDlg.editSubmit = function() {
 
 $(function() {
 
-    // 初始化头像上传
-    var avatarUp = new $WebUpload("jpImage");
-    avatarUp.setUploadBarId("progressBar");
-    avatarUp.init();
 
 });

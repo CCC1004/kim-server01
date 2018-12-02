@@ -3,21 +3,34 @@
     <div class="ibox-content">
         <div class="form-horizontal">
 
+            <input type="hidden" id="guid" value="${item.guid}">
             <div class="row">
                 <div class="col-sm-6 b-r">
-                            <#input id="guid" name="主键自增" value="${item.guid}" underline="true"/>
+                            <!--<#input id="guid" name="主键自增" value="${item.guid}" underline="true"/>-->
                             <#input id="rmName" name="热门名称" value="${item.rmName}" underline="true"/>
-                            <#input id="rmImage" name="热门图片id(与资源信息主键匹配)" value="${item.rmImage}" underline="true"/>
-                            <#input id="rmHeadImg" name="头像图片id(与资源信息主键匹配)" value="${item.rmHeadImg}" underline="true"/>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label head-scu-label">热门图片</label>
+                        <div class="col-sm-8">
+                            <div><img width="100px" height="100px" src="${ctxPath}${filePath}"></div>
+                        </div>
+                    </div>
+                            <!--<#input id="rmImage" name="热门图片id(与资源信息主键匹配)" value="${item.rmImage}" underline="true"/>-->
+                            <!--<#input id="rmHeadImg" name="头像图片id(与资源信息主键匹配)" value="${item.rmHeadImg}" underline="true"/>-->
                             <#input id="rmTitle" name="标题" value="${item.rmTitle}" />
                 </div>
 
                 <div class="col-sm-6">
                             <#input id="rmContext" name="内容" value="${item.rmContext}" underline="true"/>
                             <#input id="rmSort" name="排序" value="${item.rmSort}" underline="true"/>
-                            <#input id="rmStatus" name="是否显示" value="${item.rmStatus}" underline="true"/>
+                            <!--<#input id="rmStatus" name="是否显示" value="${item.rmStatus}" underline="true"/>-->
+                    <input type="hidden" id="rmStatusVal" value="${item.rmStatus}">
+                    <#select id="rmStatus" name="是否显示" underline="true">
+                        <option value="">--请选择--</option>
+                        <option value="1">显示</option>
+                        <option value="2">不显示</option>
+                    </#select>
                             <#input id="nt" name="备注" value="${item.nt}" underline="true"/>
-                            <#input id="ts" name="时间戳" value="${item.ts}" />
+                            <!--<#input id="ts" name="时间戳" value="${item.ts}" />-->
                 </div>
             </div>
 

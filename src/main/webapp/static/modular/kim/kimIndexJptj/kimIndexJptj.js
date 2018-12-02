@@ -55,7 +55,7 @@ KimIndexJptj.openAddKimIndexJptj = function () {
 };
 
 /**
- * 打开查看精品推荐详情
+ * 修改
  */
 KimIndexJptj.openKimIndexJptjDetail = function () {
     if (this.check()) {
@@ -76,14 +76,17 @@ KimIndexJptj.openKimIndexJptjDetail = function () {
  */
 KimIndexJptj.delete = function () {
     if (this.check()) {
-        var ajax = new $ax(Feng.ctxPath + "/kimIndexJptj/delete", function (data) {
-            Feng.success("删除成功!");
-            KimIndexJptj.table.refresh();
-        }, function (data) {
-            Feng.error("删除失败!" + data.responseJSON.message + "!");
-        });
-        ajax.set("kimIndexJptjId",this.seItem.guid);
-        ajax.start();
+        var operation = function(){
+            var ajax = new $ax(Feng.ctxPath + "/kimIndexJptj/delete", function (data) {
+                Feng.success("删除成功!");
+                KimIndexJptj.table.refresh();
+            }, function (data) {
+                Feng.error("删除失败!" + data.responseJSON.message + "!");
+            });
+            ajax.set("kimIndexJptjId",KimIndexJptj.seItem.guid);
+            ajax.start();
+        }
+        Feng.confirm("是否刪除?", operation);
     }
 };
 

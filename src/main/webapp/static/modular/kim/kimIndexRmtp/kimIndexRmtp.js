@@ -14,7 +14,7 @@ var KimIndexRmtp = {
 KimIndexRmtp.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-            {title: '主键自增', field: 'guid', visible: true, align: 'center', valign: 'middle'},
+            {title: '主键自增', field: 'guid', visible: false, align: 'center', valign: 'middle'},
             {title: '热门名称', field: 'rmName', visible: true, align: 'center', valign: 'middle'},
             {title: '热门图片id(与资源信息主键匹配)', field: 'rmImage', visible: true, align: 'center', valign: 'middle'},
             {title: '头像图片id(与资源信息主键匹配)', field: 'rmHeadImg', visible: true, align: 'center', valign: 'middle'},
@@ -23,7 +23,7 @@ KimIndexRmtp.initColumn = function () {
             {title: '排序', field: 'rmSort', visible: true, align: 'center', valign: 'middle'},
             {title: '是否显示', field: 'rmStatus', visible: true, align: 'center', valign: 'middle'},
             {title: '备注', field: 'nt', visible: true, align: 'center', valign: 'middle'},
-            {title: '时间戳', field: 'ts', visible: true, align: 'center', valign: 'middle'}
+            {title: '时间戳', field: 'ts', visible: false, align: 'center', valign: 'middle'}
     ];
 };
 
@@ -67,7 +67,7 @@ KimIndexRmtp.openKimIndexRmtpDetail = function () {
             area: ['800px', '420px'], //宽高
             fix: false, //不固定
             maxmin: true,
-            content: Feng.ctxPath + '/kimIndexRmtp/kimIndexRmtp_update/' + KimIndexRmtp.seItem.id
+            content: Feng.ctxPath + '/kimIndexRmtp/kimIndexRmtp_update/' + KimIndexRmtp.seItem.guid
         });
         this.layerIndex = index;
     }
@@ -78,14 +78,17 @@ KimIndexRmtp.openKimIndexRmtpDetail = function () {
  */
 KimIndexRmtp.delete = function () {
     if (this.check()) {
-        var ajax = new $ax(Feng.ctxPath + "/kimIndexRmtp/delete", function (data) {
-            Feng.success("删除成功!");
-            KimIndexRmtp.table.refresh();
-        }, function (data) {
-            Feng.error("删除失败!" + data.responseJSON.message + "!");
-        });
-        ajax.set("kimIndexRmtpId",this.seItem.id);
-        ajax.start();
+        var operation = function(){
+            var ajax = new $ax(Feng.ctxPath + "/kimIndexRmtp/delete", function (data) {
+                Feng.success("删除成功!");
+                KimIndexRmtp.table.refresh();
+            }, function (data) {
+                Feng.error("删除失败!" + data.responseJSON.message + "!");
+            });
+            ajax.set("kimIndexRmtpId",KimIndexRmtp.seItem.guid);
+            ajax.start();
+        }
+        Feng.confirm("是否刪除?", operation);
     }
 };
 

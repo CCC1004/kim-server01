@@ -175,6 +175,9 @@ public class ShiroConfig {
          *
          */
         Map<String, String> hashMap = new LinkedHashMap<>();
+        hashMap.put("/index/**", "anon");
+        hashMap.put("/login/**", "anon");
+        hashMap.put("/wxLogin/**", "anon");
         hashMap.put("/static/**", "anon");
         hashMap.put("/gunsApi/**", "anon");
         hashMap.put("/login", "anon");

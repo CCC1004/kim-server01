@@ -38,6 +38,8 @@ KimIndexRmtpInfoDlg.get = function(key) {
  */
 KimIndexRmtpInfoDlg.close = function() {
     parent.layer.close(window.parent.KimIndexRmtp.layerIndex);
+    //刷新列表
+    window.parent.KimIndexRmtp.table.refresh();
 }
 
 /**

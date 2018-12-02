@@ -3,6 +3,7 @@ package cn.stylefeng.guns.modular.system.model;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
@@ -22,6 +23,7 @@ public class KimIndexRmtp extends Model<KimIndexRmtp> {
     /**
      * 主键自增
      */
+    @TableId("GUID")
     private String guid;
     /**
      * 热门名称
@@ -61,10 +63,12 @@ public class KimIndexRmtp extends Model<KimIndexRmtp> {
     /**
      * 备注
      */
+    @TableField("NT")
     private String nt;
     /**
      * 时间戳
      */
+    @TableField("TS")
     private Date ts;
 
 

@@ -353,7 +353,7 @@ public class UserMgrController extends BaseController {
     /**
      * 上传图片
      */
-    @RequestMapping(method = RequestMethod.POST, path = "/upload")
+    @RequestMapping(method = RequestMethod.POST, path = "/static/upload")
     @ResponseBody
     public String upload(@RequestPart("file") MultipartFile picture) {
 

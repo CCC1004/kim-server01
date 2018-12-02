@@ -1,0 +1,9 @@
+# 微信登录配置
+wx:
+  #
+  url: https://api.weixin.qq.com/sns/jscode2session
+  # 金所炫kim
+  appid: wxc3125d0f61540579
+  secret: 1b00b5bcfa9b1bfdd085c68f5c449e84
+  # 固定参数值
+  grant_type: authorization_code

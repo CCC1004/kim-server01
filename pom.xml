@@ -149,6 +149,12 @@
             <version>${jwt.version}</version>
         </dependency>
 
+        <!-- httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+
 
         <!-- 引入 thymeleaf 模板依赖 -->
         <!--<dependency>-->

@@ -1,24 +1,31 @@
 @layout("/common/_container.html"){
 <div class="ibox float-e-margins">
     <div class="ibox-content">
+
         <div class="form-horizontal">
-
             <input type="hidden" id="guid" value="${item.guid}">
-
             <div class="row">
                 <div class="col-sm-6 b-r">
-                            <!--<#input id="guid" name="主键自增" value="${item.guid}" underline="true"/>-->
                             <#input id="jpName" name="精品名称" value="${item.jpName}" underline="true"/>
-                            <!--<#input id="jpImage" name="精品图片id(与资源信息主键匹配)" value="${item.jpImage}" underline="true"/>-->
-                    <#avatar id="jpImage" name="精品图片" underline="true" avatarImg="${item.jpImage}"/>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label head-scu-label">精品图片</label>
+                                <div class="col-sm-8">
+                                        <div><img width="100px" height="100px" src="${ctxPath}${filePath}"></div>
+                                </div>
+                            </div>
                             <#input id="jpDesc" name="精品描述" value="${item.jpDesc}" />
                 </div>
 
                 <div class="col-sm-6">
                             <#input id="jpSort" name="排序" value="${item.jpSort}" underline="true"/>
-                            <#input id="jpStatus" name="是否显示" value="${item.jpStatus}" underline="true"/>
+                    <input type="hidden" id="jpStatusVal" value="${item.jpStatus}">
+                    <#select id="jpStatus" name="是否显示" underline="true">
+                        <option value="">--请选择--</option>
+                        <option value="1">显示</option>
+                        <option value="2">不显示</option>
+                    </#select>
                             <#input id="nt" name="备注" value="${item.nt}" underline="true"/>
-                            <#input id="ts" name="时间戳" value="${item.ts}" />
+                            <!--<#input id="ts" name="时间戳" value="${item.ts}" />-->
                 </div>
             </div>
 
@@ -32,5 +39,13 @@
 
     </div>
 </div>
+<script>
+    $(function () {
+        var key=$("#jpStatusVal").val();
+        //根据值让option选中
+        $("#jpStatus option[value='"+key+"']").attr("selected","selected");
+
+    })
+</script>
 <script src="${ctxPath}/static/modular/kim/kimIndexJptj/kimIndexJptj_info.js"></script>
 @}

@@ -19,4 +19,17 @@
         guid, jp_name, jp_image, jp_desc, jp_sort, jp_status, nt, ts
     </sql>
 
+    <!-- map查询结果 -->
+    <sql id="Base_Column_List2">
+        j.guid as guid, j.jp_name as jpName, j.jp_desc as jpDesc, j.jp_image as jpImage, r.FILE_PATH as filePath
+    </sql>
+
+    <select id="getJptjList" resultType="map">
+        select
+        <include refid="Base_Column_List2" />
+        from kim_index_jptj j join kim_resources r
+        where j.jp_image=r.FILE_CD
+        order by j.jp_sort asc
+    </select>
+
 </mapper>

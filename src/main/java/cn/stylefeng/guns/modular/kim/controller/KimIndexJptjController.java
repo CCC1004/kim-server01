@@ -5,6 +5,7 @@ import cn.stylefeng.guns.modular.kim.utils.GuidUtils;
 import cn.stylefeng.guns.modular.system.model.KimResources;
 import cn.stylefeng.guns.modular.system.service.IKimResourcesService;
 import cn.stylefeng.roses.core.base.controller.BaseController;
+import cn.stylefeng.roses.core.util.ToolUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -21,6 +22,7 @@ import cn.stylefeng.guns.modular.kim.service.IKimIndexJptjService;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.tools.Tool;
 
 /**
  * 精品推荐控制器
@@ -64,6 +66,12 @@ public class KimIndexJptjController extends BaseController {
     @RequestMapping("/kimIndexJptj_update/{kimIndexJptjId}")
     public String kimIndexJptjUpdate(@PathVariable String kimIndexJptjId, Model model) {
         KimIndexJptj kimIndexJptj = kimIndexJptjService.selectById(kimIndexJptjId);
+        if(ToolUtil.isNotEmpty(kimIndexJptj.getJpImage())){
+            KimResources kimResources = kimResourcesService.selectById(kimIndexJptj.getJpImage());
+            if(ToolUtil.isNotEmpty(kimResources.getFilePath())){
+                model.addAttribute("filePath",kimResources.getFilePath());
+            }
+        }
         model.addAttribute("item",kimIndexJptj);
         LogObjectHolder.me().set(kimIndexJptj);
         return PREFIX + "kimIndexJptj_edit.html";
@@ -140,7 +148,8 @@ public class KimIndexJptjController extends BaseController {
     @RequestMapping(value = "/delete")
     @ResponseBody
     public Object delete(@RequestParam String kimIndexJptjId) {
-        kimIndexJptjService.deleteById(kimIndexJptjId);
+//        kimIndexJptjService.deleteById(kimIndexJptjId);
+        kimIndexJptjService.deleteJptjAndRes(kimIndexJptjId);
         return SUCCESS_TIP;
     }
 

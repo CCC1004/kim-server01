@@ -21,4 +21,20 @@
         guid, rm_name, rm_image, rm_head_img, rm_title, rm_context, rm_sort, rm_status, nt, ts
     </sql>
 
+    <!-- map查询结果 -->
+    <sql id="Base_Column_List2">
+        rm.guid as guid, rm.rm_name as rmName, rm.rm_title as rmTitle, rm.rm_context as rmContext,
+        img.FILE_PATH as rmImagePath, head.FILE_PATH as rmHeadImgPath
+    </sql>
+
+    <select id="getRmtpList" resultType="map">
+        select
+        <include refid="Base_Column_List2" />
+        from kim_index_rmtp rm
+        join kim_resources img on rm.rm_image=img.FILE_CD
+        join kim_resources head on rm.rm_head_img=head.FILE_CD
+        order by rm.rm_sort asc
+    </select>
+
+
 </mapper>

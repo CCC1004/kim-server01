@@ -8,8 +8,7 @@
                 <div class="row">
                     <div class="col-sm-6 b-r">
                         <#input id="jpName" name="精品名称" underline="true"/>
-                        <label class="col-sm-3 control-label">精品图片</label>
-                        <input type="file" id="jpImage" name="file" class="col-sm-3  form-control" />
+                        <#inputFile type="file" id="jpImage" label="精品图片" underline="true" />
                         <#input id="jpDesc" name="精品描述"/>
                     </div>
 
@@ -17,7 +16,8 @@
                     <div class="col-sm-6">
                         <#input id="jpSort" name="排序" underline="true"/>
                         <#select id="jpStatus" name="是否显示" underline="true">
-                            <option value="1">显示</option>
+                            <option value="">--请选择--</option>
+                            <option value="1" selected="selected">显示</option>
                             <option value="2">不显示</option>
                         </#select>
                         <#input id="nt" name="备注" underline="true"/>

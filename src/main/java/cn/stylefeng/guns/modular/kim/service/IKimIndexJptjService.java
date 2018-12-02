@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface IKimIndexJptjService extends IService<KimIndexJptj> {
 
+    boolean deleteJptjAndRes(String kimIndexJptjId);
 }
