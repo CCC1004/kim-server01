@@ -1,0 +1,44 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+
+        <form action="/coinIndexJpfl/addJpfl" id="uploadForm" method="post" enctype="multipart/form-data">
+
+            <div class="form-horizontal">
+
+                <div class="row">
+                    <div class="col-sm-6 b-r">
+                                <!--<#input id="guid" name="主键自增" underline="true"/>-->
+                                <#input id="flName" name="分类名称" underline="true"/>
+                                <!--<#input id="flImage" name="分类图片" underline="true"/>-->
+                        <#inputFile type="file" id="flImage" label="分类图片" underline="true" />
+                                <#input id="flDesc" name="分类描述"/>
+                    </div>
+
+                    <div class="col-sm-6">
+                                <#input id="flSort" name="排序" underline="true"/>
+                        <#select id="flStatus" name="是否显示" underline="true">
+                            <option value="">--请选择--</option>
+                            <option value="1" selected="selected">显示</option>
+                            <option value="2">不显示</option>
+                        </#select>
+                                <!--<#input id="flStatus" name="是否显示（1显示；2不显示）" underline="true"/>-->
+                                <#input id="nt" name="备注" underline="true"/>
+                                <!--<#input id="ts" name="时间戳" underline="true"/>-->
+                    </div>
+                </div>
+
+                <div class="row btn-group-m-t">
+                    <div class="col-sm-10">
+                        <input type="submit" class="btn btn-success" id="fileSubmit" name="Submit" value="上传" />
+                        <!--<#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="CoinIndexJpflInfoDlg.addSubmit()"/>-->
+
+                        <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="CoinIndexJpflInfoDlg.close()"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/coin/coinIndexJpfl/coinIndexJpfl_info.js"></script>
+@}

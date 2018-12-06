@@ -20,15 +20,23 @@ public interface WxIndexService {
      */
     List<Map<String,Object>> getLbList();
 
+    List<Map<String, Object>> getCoinLbList();
+
+
     /**
      * 获取精品推荐列表
      */
     List<Map<String,Object>> getJptjList();
 
+    List<Map<String, Object>> getCoinJptjList();
+
+
     /**
      * 获取热门图片列表
      */
     List<Map<String,Object>> getRmtpList();
+
+
 
 }
 

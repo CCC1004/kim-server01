@@ -1,8 +1,5 @@
 package cn.stylefeng.guns.modular.weixin.controller;
 
-import cn.stylefeng.guns.modular.system.model.KimIndexJptj;
-import cn.stylefeng.guns.modular.system.model.KimIndexLb;
-import cn.stylefeng.guns.modular.system.model.KimIndexRmtp;
 import cn.stylefeng.guns.modular.weixin.service.WxIndexService;
 import cn.stylefeng.guns.modular.weixin.utils.ResultUtils;
 import io.swagger.annotations.ApiOperation;
@@ -10,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,11 +32,16 @@ public class WxIndexController {
      * 获取轮播图列表
      */
     @ApiOperation(value="轮播图列表", httpMethod="GET", notes="获取轮播图列表",response=String.class)
-    @GetMapping("/getLbList")
-    public ResultUtils getLbList(){
+    @GetMapping("/getLbList/{dataType}")
+    public ResultUtils getLbList(@PathVariable("dataType") String dataType){
         ResultUtils result = new ResultUtils();
-        List<Map<String,Object>> list =  wxIndexService.getLbList();
-        logger.info(list.toString());
+        List<Map<String,Object>> list = null;
+        if(dataType.equals("1")){
+            list = wxIndexService.getLbList();
+            logger.info(list.toString());
+        }else if(dataType.equals("2")){
+            list = wxIndexService.getCoinLbList();
+        }
 
         if(list!=null && list.size()>0){
             result = ResultUtils.ok(list);
@@ -52,11 +55,16 @@ public class WxIndexController {
      * 获取精品推荐列表
      */
     @ApiOperation(value="精品推荐列表", httpMethod="GET", notes="获取精品推荐列表",response=String.class)
-    @GetMapping("/getJptjList")
-    public ResultUtils getJptjList(){
+    @GetMapping("/getJptjList/{dataType}")
+    public ResultUtils getJptjList(@PathVariable("dataType") String dataType){
         ResultUtils result = new ResultUtils();
-        List<Map<String,Object>> list = wxIndexService.getJptjList();
-        logger.info(list.toString());
+        List<Map<String,Object>> list = null;
+        if(dataType.equals("1")){
+            list = wxIndexService.getJptjList();
+            logger.info(list.toString());
+        }else if(dataType.equals("2")){
+            list = wxIndexService.getCoinJptjList();
+        }
 
         if(list!=null && list.size()>0){
             result = ResultUtils.ok(list);

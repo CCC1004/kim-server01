@@ -5,6 +5,7 @@ import cn.stylefeng.guns.modular.kim.utils.GuidUtils;
 import cn.stylefeng.guns.modular.system.model.KimIndexJptj;
 import cn.stylefeng.guns.modular.system.model.KimResources;
 import cn.stylefeng.guns.modular.system.service.IKimResourcesService;
+import cn.stylefeng.guns.modular.weixin.properties.PathProperties;
 import cn.stylefeng.roses.core.base.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Isolation;
@@ -41,6 +42,10 @@ public class KimIndexLbController extends BaseController {
 
     @Autowired
     private IKimResourcesService kimResourcesService;
+
+
+    @Autowired
+    private PathProperties pathProperties;
 
     /**
      * 跳转到轮播图首页
@@ -100,7 +105,8 @@ public class KimIndexLbController extends BaseController {
         /*
             上传图片
          */
-        String filePath = FileUtils.singleUpload(file, request);
+        String kimPath = pathProperties.getKimPath();
+        String filePath = FileUtils.singleUpload(file, request, kimPath);
 
         /*
             保存文件至数据库
@@ -141,7 +147,7 @@ public class KimIndexLbController extends BaseController {
     @RequestMapping(value = "/delete")
     @ResponseBody
     public Object delete(@RequestParam String kimIndexLbId) {
-        kimIndexLbService.deleteById(kimIndexLbId);
+//        kimIndexLbService.deleteById(kimIndexLbId);
         kimIndexLbService.deleteLbAndRes(kimIndexLbId);
         return SUCCESS_TIP;
     }

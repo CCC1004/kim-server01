@@ -4,6 +4,7 @@ import cn.stylefeng.guns.modular.kim.utils.FileUtils;
 import cn.stylefeng.guns.modular.kim.utils.GuidUtils;
 import cn.stylefeng.guns.modular.system.model.KimResources;
 import cn.stylefeng.guns.modular.system.service.IKimResourcesService;
+import cn.stylefeng.guns.modular.weixin.properties.PathProperties;
 import cn.stylefeng.roses.core.base.controller.BaseController;
 import cn.stylefeng.roses.core.util.ToolUtil;
 import org.springframework.stereotype.Controller;
@@ -42,6 +43,8 @@ public class KimIndexJptjController extends BaseController {
     @Autowired
     private IKimResourcesService kimResourcesService;
 
+    @Autowired
+    private PathProperties pathProperties;
 
     /**
      * 跳转到精品推荐首页
@@ -108,7 +111,8 @@ public class KimIndexJptjController extends BaseController {
         /*
             上传图片
          */
-        String filePath = FileUtils.singleUpload(file, request);
+        String kimPath = pathProperties.getKimPath();
+        String filePath = FileUtils.singleUpload(file, request, kimPath);
 
         /*
             保存文件至数据库

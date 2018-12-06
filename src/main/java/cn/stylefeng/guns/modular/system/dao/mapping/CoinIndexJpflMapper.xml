@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.system.dao.CoinIndexJpflMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.system.model.CoinIndexJpfl">
+        <id column="guid" property="guid" />
+        <result column="fl_name" property="flName" />
+        <result column="fl_image" property="flImage" />
+        <result column="fl_desc" property="flDesc" />
+        <result column="fl_sort" property="flSort" />
+        <result column="fl_status" property="flStatus" />
+        <result column="nt" property="nt" />
+        <result column="ts" property="ts" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        guid, fl_name, fl_image, fl_desc, fl_sort, fl_status, nt, ts
+    </sql>
+
+
+    <!-- map查询结果 -->
+    <sql id="Base_Column_List2">
+        j.guid as guid, j.fl_name as flName, j.fl_desc as flDesc, j.fl_image as flImage, r.FILE_PATH as filePath
+    </sql>
+
+    <select id="getCoinJptjList" resultType="map">
+        select
+        <include refid="Base_Column_List2" />
+        from coin_index_jpfl j join coin_resources r
+        where j.fl_image=r.FILE_CD
+        order by j.fl_sort asc
+    </select>
+
+
+</mapper>

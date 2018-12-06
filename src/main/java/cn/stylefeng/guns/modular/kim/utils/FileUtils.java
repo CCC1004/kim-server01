@@ -20,9 +20,10 @@ public class FileUtils {
      * 上传单个文件
      * @param file
      * @param request
+     * @param upPath    上传路径
      * @return
      */
-    public static String singleUpload(MultipartFile file, HttpServletRequest request){
+    public static String singleUpload(MultipartFile file, HttpServletRequest request, String upPath){
 
         //图片名字
         String fileName = file.getOriginalFilename();
@@ -30,7 +31,7 @@ public class FileUtils {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String dateStr = format.format(new Date()).replace("-", "");
         //设置文件需要上传到的路径
-        String pathStr = "/static/upload/kim/" + dateStr + "/";
+        String pathStr = upPath + dateStr + "/";
         //文件存放路径
         String filePath = request.getSession().getServletContext().getRealPath(pathStr) ;
 

@@ -1,6 +1,6 @@
 package cn.stylefeng.guns.modular.system.dao;
 
-import cn.stylefeng.guns.modular.system.model.KimIndexLb;
+import cn.stylefeng.guns.modular.system.model.CoinIndexLb;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 import java.util.List;
@@ -12,10 +12,10 @@ import java.util.Map;
  * </p>
  *
  * @author superc
- * @since 2018-11-24
+ * @since 2018-12-06
  */
-public interface KimIndexLbMapper extends BaseMapper<KimIndexLb> {
+public interface CoinIndexLbMapper extends BaseMapper<CoinIndexLb> {
 
-    List<Map<String,Object>> getLbList();
+    List<Map<String, Object>> getCoinLbList();
 
 }

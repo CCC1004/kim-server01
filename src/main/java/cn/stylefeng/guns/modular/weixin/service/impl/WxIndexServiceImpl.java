@@ -1,8 +1,6 @@
 package cn.stylefeng.guns.modular.weixin.service.impl;
 
-import cn.stylefeng.guns.modular.system.dao.KimIndexJptjMapper;
-import cn.stylefeng.guns.modular.system.dao.KimIndexLbMapper;
-import cn.stylefeng.guns.modular.system.dao.KimIndexRmtpMapper;
+import cn.stylefeng.guns.modular.system.dao.*;
 import cn.stylefeng.guns.modular.weixin.service.WxIndexService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +20,13 @@ public class WxIndexServiceImpl implements WxIndexService {
     KimIndexLbMapper kimIndexLbMapper;
 
     @Autowired
+    CoinIndexLbMapper coinIndexLbMapper;
+
+    @Autowired
     KimIndexJptjMapper kimIndexJptjMapper;
+
+    @Autowired
+    CoinIndexJpflMapper coinIndexJpflMapper;
 
     @Autowired
     KimIndexRmtpMapper kimIndexRmtpMapper;
@@ -39,12 +43,24 @@ public class WxIndexServiceImpl implements WxIndexService {
         return list;
     }
 
+    @Override
+    public List<Map<String, Object>> getCoinLbList() {
+        List<Map<String,Object>> list = coinIndexLbMapper.getCoinLbList();
+        return list;
+    }
+
     /**
      * 获取精品推荐列表
      */
     @Override
     public List<Map<String,Object>> getJptjList() {
         List<Map<String,Object>> list = kimIndexJptjMapper.getJptjList();
+        return list;
+    }
+
+    @Override
+    public List<Map<String,Object>> getCoinJptjList() {
+        List<Map<String,Object>> list = coinIndexJpflMapper.getCoinJptjList();
         return list;
     }
 

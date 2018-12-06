@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.stylefeng.guns.modular.system.dao.KimIndexLbMapper">
+<mapper namespace="cn.stylefeng.guns.modular.system.dao.CoinIndexLbMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.system.model.KimIndexLb">
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.system.model.CoinIndexLb">
         <id column="guid" property="guid" />
         <result column="lb_name" property="lbName" />
         <result column="lb_image" property="lbImage" />
@@ -23,10 +23,10 @@
         l.guid as guid, l.lb_name as lbName, l.lb_image as lbImage, r.FILE_PATH as filePath
     </sql>
 
-    <select id="getLbList" resultType="map">
+    <select id="getCoinLbList" resultType="map">
         select
         <include refid="Base_Column_List2" />
-        from kim_index_lb l join kim_resources r
+        from coin_index_lb l join coin_resources r
         on l.lb_image=r.FILE_CD
         order by l.lb_sort asc
     </select>

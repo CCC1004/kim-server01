@@ -5,6 +5,7 @@ import cn.stylefeng.guns.modular.kim.utils.GuidUtils;
 import cn.stylefeng.guns.modular.system.model.KimIndexJptj;
 import cn.stylefeng.guns.modular.system.model.KimResources;
 import cn.stylefeng.guns.modular.system.service.IKimResourcesService;
+import cn.stylefeng.guns.modular.weixin.properties.PathProperties;
 import cn.stylefeng.roses.core.base.controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Isolation;
@@ -40,6 +41,9 @@ public class KimIndexRmtpController extends BaseController {
 
     @Autowired
     private IKimResourcesService kimResourcesService;
+
+    @Autowired
+    private PathProperties pathProperties;
 
     /**
      * 跳转到热门图片首页
@@ -96,14 +100,16 @@ public class KimIndexRmtpController extends BaseController {
                                    @RequestParam("headImg") MultipartFile headImgFile,
                                    HttpServletRequest request,
                                    KimIndexRmtp kimIndexRmtp){
+        String kimPath = pathProperties.getKimPath();
+
         //上传图片
-        String imgFilePath = FileUtils.singleUpload(imgFile, request);
+        String imgFilePath = FileUtils.singleUpload(imgFile, request, kimPath);
         //保存文件至数据库
         KimResources imgKimResources = FileUtils.saveKimResource(imgFile,imgFilePath);
         kimResourcesService.insert(imgKimResources);
 
         //上传头像
-        String headImgFilePath = FileUtils.singleUpload(headImgFile, request);
+        String headImgFilePath = FileUtils.singleUpload(headImgFile, request, kimPath);
         //保存文件至数据库
         KimResources headKimResources = FileUtils.saveKimResource(headImgFile,headImgFilePath);
         kimResourcesService.insert(headKimResources);

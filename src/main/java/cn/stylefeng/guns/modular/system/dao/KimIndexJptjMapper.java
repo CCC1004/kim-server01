@@ -18,4 +18,5 @@ public interface KimIndexJptjMapper extends BaseMapper<KimIndexJptj> {
 
 
     List<Map<String, Object>> getJptjList();
+
 }

@@ -1,0 +1,46 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <input type="hidden" id="guid" value="${item.guid}">
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                    <!--<#input id="guid" name="主键自增" value="${item.guid}" underline="true"/>-->
+                    <#input id="lbName" name="轮播页名称" value="${item.lbName}" underline="true"/>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label head-scu-label">轮播图片</label>
+                        <div class="col-sm-8">
+                            <div><img width="100px" height="100px" src="${ctxPath}${filePath}"></div>
+                        </div>
+                    </div>
+                    <!--<#input id="lbImage" name="轮播图片id(与资源信息主键匹配)" value="${item.lbImage}" />-->
+                </div>
+
+                <div class="col-sm-6">
+                    <#input id="lbSort" name="排序" value="${item.lbSort}" underline="true"/>
+                    <!--<#input id="lbStatus" name="是否显示" value="${item.lbStatus}" underline="true"/>-->
+                    <input type="hidden" id="lbStatusVal" value="${item.lbStatus}">
+                    <#select id="lbStatus" name="是否显示" underline="true">
+                        <option value="">--请选择--</option>
+                        <option value="1">显示</option>
+                        <option value="2">不显示</option>
+                    </#select>
+                <#input id="nt" name="备注" value="${item.nt}" underline="true"/>
+                <!--<#input id="ts" name="时间戳" value="${item.ts}" />-->
+            </div>
+        </div>
+
+
+        <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="CoinIndexLbInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="CoinIndexLbInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/coin/coinIndexLb/coinIndexLb_info.js"></script>
+@}
