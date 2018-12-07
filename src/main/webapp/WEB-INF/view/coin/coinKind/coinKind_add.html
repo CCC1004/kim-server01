@@ -1,0 +1,43 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <#input id="guid" name="主键uuid" underline="true"/>
+                            <#input id="kindName" name="品种名称" underline="true"/>
+                            <#input id="kindValue" name="面值" underline="true"/>
+                            <#input id="kindDesc" name="品种描述" underline="true"/>
+                            <#input id="flId" name="精品分类id" underline="true"/>
+                            <#input id="issueTime" name="发行日期" underline="true"/>
+                            <#input id="issueSize" name="发行量" underline="true"/>
+                            <#input id="kindSize" name="规格" underline="true"/>
+                            <#input id="kindMaterial" name="材质"/>
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="kindPacking" name="品种包装" underline="true"/>
+                            <#input id="nowPriseDown" name="目前价格下限" underline="true"/>
+                            <#input id="nowPriseUp" name="目前价格上限" underline="true"/>
+                            <#input id="kindImage" name="品种图片1（与资源表id关联）" underline="true"/>
+                            <#input id="kindImage2" name="品种图片2" underline="true"/>
+                            <#input id="kindImage3" name="品种图片3" underline="true"/>
+                            <#input id="kindImage4" name="品种图片4" underline="true"/>
+                            <#input id="ts" name="时间戳" underline="true"/>
+                            <#input id="nt" name="备注" underline="true"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="CoinKindInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="CoinKindInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/coin/coinKind/coinKind_info.js"></script>
+@}

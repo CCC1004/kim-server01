@@ -93,6 +93,16 @@ public class WxIndexController {
     }
 
 
+    /**
+     * 根据分类id，获取分类详情列表页
+     *
+     */
+    @GetMapping("/searchDetailByGuid")
+    public ResultUtils searchDetailByGuid(){
+        ResultUtils result = new ResultUtils();
+
+        return result;
+    }
 
 
 

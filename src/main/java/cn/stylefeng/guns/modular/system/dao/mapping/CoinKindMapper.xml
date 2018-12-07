@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.stylefeng.guns.modular.system.dao.CoinKindMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.stylefeng.guns.modular.system.model.CoinKind">
+        <id column="guid" property="guid" />
+        <result column="kind_name" property="kindName" />
+        <result column="kind_value" property="kindValue" />
+        <result column="kind_desc" property="kindDesc" />
+        <result column="fl_id" property="flId" />
+        <result column="issue_time" property="issueTime" />
+        <result column="issue_size" property="issueSize" />
+        <result column="kind_size" property="kindSize" />
+        <result column="kind_material" property="kindMaterial" />
+        <result column="kind_packing" property="kindPacking" />
+        <result column="now_prise_down" property="nowPriseDown" />
+        <result column="now_prise_up" property="nowPriseUp" />
+        <result column="kind_image" property="kindImage" />
+        <result column="kind_image2" property="kindImage2" />
+        <result column="kind_image3" property="kindImage3" />
+        <result column="kind_image4" property="kindImage4" />
+        <result column="ts" property="ts" />
+        <result column="nt" property="nt" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        guid, kind_name, kind_value, kind_desc, fl_id, issue_time, issue_size, kind_size, kind_material, kind_packing, now_prise_down, now_prise_up, kind_image, kind_image2, kind_image3, kind_image4, ts, nt
+    </sql>
+
+</mapper>
