@@ -2,7 +2,58 @@
  * 初始化品种信息详情对话框
  */
 var CoinKindInfoDlg = {
-    coinKindInfoData : {}
+    coinKindInfoData : {},
+    validateFields: {
+        kindName: {
+            validators: {
+                notEmpty: {
+                    message: '品种名称不能为空'
+                },
+
+            }
+        },
+        kindValue: {
+            validators: {
+                notEmpty: {
+                    message: '面值不能为空'
+                },
+                stringLength: {
+                    min: 0,
+                    max: 10,
+                    message: '长度必须在0到10位之间'
+                },
+            }
+        },
+        flId: {
+            validators: {
+                notEmpty: {
+                    message: '精品分类不能为空'
+                },
+            }
+        },
+        flId: {
+            validators: {
+                notEmpty: {
+                    message: '精品分类不能为空'
+                },
+            }
+        },
+        issueTime: {
+            validators: {
+                notEmpty: {
+                    message: '发行日期不能为空'
+                },
+            }
+        },
+        issueSize: {
+            validators: {
+                notEmpty: {
+                    message: '发行量不能为空'
+                },
+            }
+        },
+
+    }
 };
 
 /**
@@ -72,6 +123,10 @@ CoinKindInfoDlg.addSubmit = function() {
 
     this.clearData();
     this.collectData();
+    //验证
+    if (!this.validate()) {
+        return;
+    }
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/coinKind/add", function(data){
@@ -92,6 +147,10 @@ CoinKindInfoDlg.editSubmit = function() {
 
     this.clearData();
     this.collectData();
+    //验证
+    if (!this.validate()) {
+        return;
+    }
 
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/coinKind/update", function(data){
@@ -105,6 +164,18 @@ CoinKindInfoDlg.editSubmit = function() {
     ajax.start();
 }
 
+/**
+ * 验证数据是否为空
+ */
+CoinKindInfoDlg.validate = function () {
+    $('#coinKindInfo').data("bootstrapValidator").resetForm();
+    $('#coinKindInfo').bootstrapValidator('validate');
+    return $("#coinKindInfo").data('bootstrapValidator').isValid();
+}
+
 $(function() {
+
+    //验证
+    Feng.initValidator("coinKindInfo", CoinKindInfoDlg.validateFields);
 
 });

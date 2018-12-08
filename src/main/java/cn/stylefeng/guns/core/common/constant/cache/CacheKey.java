@@ -43,4 +43,11 @@ public interface CacheKey {
      */
     String DEPT_NAME = "dept_name_";
 
+    /**
+     * 小程序首页
+     */
+    String WX_INDEX_LB = "wx_index_lb_";
+    String WX_INDEX_JP = "wx_index_jp_";
+    String WX_INDEX_RM = "wx_index_rm_";
+
 }

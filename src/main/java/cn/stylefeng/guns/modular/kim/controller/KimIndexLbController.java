@@ -1,5 +1,8 @@
 package cn.stylefeng.guns.modular.kim.controller;
 
+import cn.stylefeng.guns.core.common.constant.cache.Cache;
+import cn.stylefeng.guns.core.common.constant.cache.CacheKey;
+import cn.stylefeng.guns.core.util.CacheUtil;
 import cn.stylefeng.guns.modular.kim.utils.FileUtils;
 import cn.stylefeng.guns.modular.kim.utils.GuidUtils;
 import cn.stylefeng.guns.modular.system.model.KimIndexJptj;
@@ -105,35 +108,26 @@ public class KimIndexLbController extends BaseController {
         /*
             上传图片
          */
-        String kimPath = pathProperties.getKimPath();
-        String filePath = FileUtils.singleUpload(file, request, kimPath);
-
-        /*
-            保存文件至数据库
-         */
-        KimResources kimResources = new KimResources();
-        kimResources.setFileCd(GuidUtils.getGuid());
-        //图片名字
-        String fileName = file.getOriginalFilename();
-        kimResources.setFileNm(fileName);
-        //资源类型，图片为2
-        kimResources.setMulTp("2");
-
-        //图片类型
-        String contentType = file.getContentType();
-        kimResources.setFileExt(contentType);
-        kimResources.setFilePath(filePath);
-        kimResources.setTs(GuidUtils.getCreateTime());
-        kimResourcesService.insert(kimResources);
+        if(!file.isEmpty()){
+            String kimPath = pathProperties.getKimPath();
+            String filePath = FileUtils.singleUpload(file, request, kimPath);
+            //保存文件至数据库
+            KimResources kimResources = FileUtils.saveKimResource(file, filePath);
+            kimResourcesService.insert(kimResources);
+            //设置图片资源guid
+            kimIndexLb.setLbImage(kimResources.getFileCd());
+        }
 
         /*
           保存精品推荐信息
          */
         kimIndexLb.setGuid(GuidUtils.getGuid());
         kimIndexLb.setTs(GuidUtils.getCreateTime());
-        //设置图片资源guid
-        kimIndexLb.setLbImage(kimResources.getFileCd());
+
         kimIndexLbService.insert(kimIndexLb);
+
+        //删除缓存数据
+        CacheUtil.remove(Cache.INDEX, CacheKey.WX_INDEX_LB+"1");
 
 //        return SUCCESS_TIP;
         return PREFIX + "kimIndexLb_add.html";
@@ -149,6 +143,8 @@ public class KimIndexLbController extends BaseController {
     public Object delete(@RequestParam String kimIndexLbId) {
 //        kimIndexLbService.deleteById(kimIndexLbId);
         kimIndexLbService.deleteLbAndRes(kimIndexLbId);
+        //删除缓存数据
+        CacheUtil.remove(Cache.INDEX, CacheKey.WX_INDEX_LB+"1");
         return SUCCESS_TIP;
     }
 
@@ -159,6 +155,8 @@ public class KimIndexLbController extends BaseController {
     @ResponseBody
     public Object update(KimIndexLb kimIndexLb) {
         kimIndexLbService.updateById(kimIndexLb);
+        //删除缓存数据
+        CacheUtil.remove(Cache.INDEX, CacheKey.WX_INDEX_LB+"1");
         return SUCCESS_TIP;
     }
 

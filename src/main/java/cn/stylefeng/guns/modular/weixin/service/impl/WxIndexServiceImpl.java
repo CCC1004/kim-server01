@@ -37,30 +37,29 @@ public class WxIndexServiceImpl implements WxIndexService {
      * @return
      */
     @Override
-    public List<Map<String,Object>> getLbList() {
-
-        List<Map<String,Object>> list = kimIndexLbMapper.getLbList();
+    public List<Map<String,Object>> getLbList(String dataType) {
+        List<Map<String,Object>> list = null;
+        if(dataType.equals("1")){
+            list = kimIndexLbMapper.getLbList();
+        }else if(dataType.equals("2")){
+            list = coinIndexLbMapper.getCoinLbList();
+        }
         return list;
     }
 
-    @Override
-    public List<Map<String, Object>> getCoinLbList() {
-        List<Map<String,Object>> list = coinIndexLbMapper.getCoinLbList();
-        return list;
-    }
 
     /**
      * 获取精品推荐列表
      */
     @Override
-    public List<Map<String,Object>> getJptjList() {
-        List<Map<String,Object>> list = kimIndexJptjMapper.getJptjList();
-        return list;
-    }
+    public List<Map<String,Object>> getJptjList(String dataType) {
+        List<Map<String,Object>> list = null;
+        if(dataType.equals("1")){
+            list = kimIndexJptjMapper.getJptjList();
+        }else if(dataType.equals("2")){
+            list = coinIndexJpflMapper.getCoinJptjList();
+        }
 
-    @Override
-    public List<Map<String,Object>> getCoinJptjList() {
-        List<Map<String,Object>> list = coinIndexJpflMapper.getCoinJptjList();
         return list;
     }
 

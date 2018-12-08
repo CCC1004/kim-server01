@@ -1,6 +1,9 @@
 package cn.stylefeng.guns.modular.coin.controller;
 
+import cn.stylefeng.guns.core.common.constant.cache.Cache;
+import cn.stylefeng.guns.core.common.constant.cache.CacheKey;
 import cn.stylefeng.guns.core.log.LogObjectHolder;
+import cn.stylefeng.guns.core.util.CacheUtil;
 import cn.stylefeng.guns.modular.coin.service.ICoinIndexJpflService;
 import cn.stylefeng.guns.modular.coin.service.ICoinResourcesService;
 import cn.stylefeng.guns.modular.kim.utils.FileUtils;
@@ -105,35 +108,26 @@ public class CoinIndexJpflController extends BaseController {
         /*
             上传图片
          */
-        String coinPath = pathProperties.getCoinPath();
-        String filePath = FileUtils.singleUpload(file, request, coinPath);
-
-        /*
-            保存文件至数据库
-         */
-        CoinResources coinResources = new CoinResources();
-        coinResources.setFileCd(GuidUtils.getGuid());
-        //图片名字
-        String fileName = file.getOriginalFilename();
-        coinResources.setFileNm(fileName);
-        //资源类型，图片为2
-        coinResources.setMulTp("2");
-
-        //图片类型
-        String contentType = file.getContentType();
-        coinResources.setFileExt(contentType);
-        coinResources.setFilePath(filePath);
-        coinResources.setTs(GuidUtils.getCreateTime());
-        coinResourcesService.insert(coinResources);
+        if(!file.isEmpty()){
+            String coinPath = pathProperties.getCoinPath();
+            String filePath = FileUtils.singleUpload(file, request, coinPath);
+            //保存文件至数据库
+            CoinResources coinResources = FileUtils.saveCoinResource(file,filePath);
+            coinResourcesService.insert(coinResources);
+            //设置图片资源guid
+            coinIndexJpfl.setFlImage(coinResources.getFileCd());
+        }
 
         /*
           保存精品推荐信息
          */
         coinIndexJpfl.setGuid(GuidUtils.getGuid());
         coinIndexJpfl.setTs(GuidUtils.getCreateTime());
-        //设置图片资源guid
-        coinIndexJpfl.setFlImage(coinResources.getFileCd());
+
         coinIndexJpflService.insert(coinIndexJpfl);
+
+        //删除缓存数据
+        CacheUtil.remove(Cache.INDEX, CacheKey.WX_INDEX_JP+"2");
 
         return PREFIX + "coinIndexJpfl_add.html";
     }
@@ -147,6 +141,9 @@ public class CoinIndexJpflController extends BaseController {
     public Object delete(@RequestParam String coinIndexJpflId) {
 //        coinIndexJpflService.deleteById(coinIndexJpflId);
         coinIndexJpflService.deleteByIdAndRes(coinIndexJpflId);
+
+        //删除缓存数据
+        CacheUtil.remove(Cache.INDEX, CacheKey.WX_INDEX_JP+"2");
         return SUCCESS_TIP;
     }
 
@@ -157,6 +154,9 @@ public class CoinIndexJpflController extends BaseController {
     @ResponseBody
     public Object update(CoinIndexJpfl coinIndexJpfl) {
         coinIndexJpflService.updateById(coinIndexJpfl);
+
+        //删除缓存数据
+        CacheUtil.remove(Cache.INDEX, CacheKey.WX_INDEX_JP+"2");
         return SUCCESS_TIP;
     }
 

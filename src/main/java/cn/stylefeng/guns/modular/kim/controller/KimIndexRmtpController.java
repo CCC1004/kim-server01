@@ -1,5 +1,8 @@
 package cn.stylefeng.guns.modular.kim.controller;
 
+import cn.stylefeng.guns.core.common.constant.cache.Cache;
+import cn.stylefeng.guns.core.common.constant.cache.CacheKey;
+import cn.stylefeng.guns.core.util.CacheUtil;
 import cn.stylefeng.guns.modular.kim.utils.FileUtils;
 import cn.stylefeng.guns.modular.kim.utils.GuidUtils;
 import cn.stylefeng.guns.modular.system.model.KimIndexJptj;
@@ -103,26 +106,35 @@ public class KimIndexRmtpController extends BaseController {
         String kimPath = pathProperties.getKimPath();
 
         //上传图片
-        String imgFilePath = FileUtils.singleUpload(imgFile, request, kimPath);
-        //保存文件至数据库
-        KimResources imgKimResources = FileUtils.saveKimResource(imgFile,imgFilePath);
-        kimResourcesService.insert(imgKimResources);
+        if(!imgFile.isEmpty()){
+            String imgFilePath = FileUtils.singleUpload(imgFile, request, kimPath);
+            //保存文件至数据库
+            KimResources imgKimResources = FileUtils.saveKimResource(imgFile,imgFilePath);
+            kimResourcesService.insert(imgKimResources);
+            //设置图片资源guid
+            kimIndexRmtp.setRmImage(imgKimResources.getFileCd());
+        }
 
         //上传头像
-        String headImgFilePath = FileUtils.singleUpload(headImgFile, request, kimPath);
-        //保存文件至数据库
-        KimResources headKimResources = FileUtils.saveKimResource(headImgFile,headImgFilePath);
-        kimResourcesService.insert(headKimResources);
+        if(!headImgFile.isEmpty()){
+            String headImgFilePath = FileUtils.singleUpload(headImgFile, request, kimPath);
+            //保存文件至数据库
+            KimResources headKimResources = FileUtils.saveKimResource(headImgFile,headImgFilePath);
+            kimResourcesService.insert(headKimResources);
+            //设置图片资源guid
+            kimIndexRmtp.setRmHeadImg(headKimResources.getFileCd());
+        }
 
         /*
           保存热门图片信息
          */
         kimIndexRmtp.setGuid(GuidUtils.getGuid());
         kimIndexRmtp.setTs(GuidUtils.getCreateTime());
-        //设置图片资源guid
-        kimIndexRmtp.setRmImage(imgKimResources.getFileCd());
-        kimIndexRmtp.setRmHeadImg(headKimResources.getFileCd());
+
         kimIndexRmtpService.insert(kimIndexRmtp);
+
+        //删除缓存数据
+        CacheUtil.remove(Cache.INDEX, CacheKey.WX_INDEX_RM+"1");
 
         return PREFIX + "kimIndexRmtp_add.html";
     }
@@ -135,6 +147,9 @@ public class KimIndexRmtpController extends BaseController {
     @ResponseBody
     public Object delete(@RequestParam String kimIndexRmtpId) {
         kimIndexRmtpService.deleteById(kimIndexRmtpId);
+
+        //删除缓存数据
+        CacheUtil.remove(Cache.INDEX, CacheKey.WX_INDEX_RM+"1");
         return SUCCESS_TIP;
     }
 
@@ -145,6 +160,9 @@ public class KimIndexRmtpController extends BaseController {
     @ResponseBody
     public Object update(KimIndexRmtp kimIndexRmtp) {
         kimIndexRmtpService.updateById(kimIndexRmtp);
+
+        //删除缓存数据
+        CacheUtil.remove(Cache.INDEX, CacheKey.WX_INDEX_RM+"1");
         return SUCCESS_TIP;
     }
 

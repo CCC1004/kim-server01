@@ -14,7 +14,7 @@ var CoinKind = {
 CoinKind.initColumn = function () {
     return [
         {field: 'selectItem', radio: true},
-            {title: '主键uuid', field: 'guid', visible: true, align: 'center', valign: 'middle'},
+            // {title: '主键uuid', field: 'guid', visible: true, align: 'center', valign: 'middle'},
             {title: '品种名称', field: 'kindName', visible: true, align: 'center', valign: 'middle'},
             {title: '面值', field: 'kindValue', visible: true, align: 'center', valign: 'middle'},
             {title: '品种描述', field: 'kindDesc', visible: true, align: 'center', valign: 'middle'},
@@ -25,13 +25,13 @@ CoinKind.initColumn = function () {
             {title: '材质', field: 'kindMaterial', visible: true, align: 'center', valign: 'middle'},
             {title: '品种包装', field: 'kindPacking', visible: true, align: 'center', valign: 'middle'},
             {title: '目前价格下限', field: 'nowPriseDown', visible: true, align: 'center', valign: 'middle'},
-            {title: '目前价格上限', field: 'nowPriseUp', visible: true, align: 'center', valign: 'middle'},
-            {title: '品种图片1（与资源表id关联）', field: 'kindImage', visible: true, align: 'center', valign: 'middle'},
-            {title: '品种图片2', field: 'kindImage2', visible: true, align: 'center', valign: 'middle'},
-            {title: '品种图片3', field: 'kindImage3', visible: true, align: 'center', valign: 'middle'},
-            {title: '品种图片4', field: 'kindImage4', visible: true, align: 'center', valign: 'middle'},
-            {title: '时间戳', field: 'ts', visible: true, align: 'center', valign: 'middle'},
-            {title: '备注', field: 'nt', visible: true, align: 'center', valign: 'middle'}
+            {title: '目前价格上限', field: 'nowPriseUp', visible: false, align: 'center', valign: 'middle'},
+            // {title: '品种图片1（与资源表id关联）', field: 'kindImage', visible: true, align: 'center', valign: 'middle'},
+            // {title: '品种图片2', field: 'kindImage2', visible: true, align: 'center', valign: 'middle'},
+            // {title: '品种图片3', field: 'kindImage3', visible: true, align: 'center', valign: 'middle'},
+            // {title: '品种图片4', field: 'kindImage4', visible: true, align: 'center', valign: 'middle'},
+            // {title: '时间戳', field: 'ts', visible: true, align: 'center', valign: 'middle'},
+            // {title: '备注', field: 'nt', visible: true, align: 'center', valign: 'middle'}
     ];
 };
 
@@ -75,7 +75,7 @@ CoinKind.openCoinKindDetail = function () {
             area: ['800px', '420px'], //宽高
             fix: false, //不固定
             maxmin: true,
-            content: Feng.ctxPath + '/coinKind/coinKind_update/' + CoinKind.seItem.id
+            content: Feng.ctxPath + '/coinKind/coinKind_update/' + CoinKind.seItem.guid
         });
         this.layerIndex = index;
     }
@@ -92,7 +92,7 @@ CoinKind.delete = function () {
         }, function (data) {
             Feng.error("删除失败!" + data.responseJSON.message + "!");
         });
-        ajax.set("coinKindId",this.seItem.id);
+        ajax.set("coinKindId",CoinKind.seItem.guid);
         ajax.start();
     }
 };

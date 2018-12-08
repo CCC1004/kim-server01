@@ -27,4 +27,9 @@ public interface Cache {
      * 常量缓存
      */
     String CONSTANT = "CONSTANT";
+
+    /**
+     * 小程序首页
+     */
+    String INDEX = "INDEX";
 }

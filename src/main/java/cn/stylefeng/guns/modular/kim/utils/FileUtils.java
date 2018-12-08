@@ -1,5 +1,6 @@
 package cn.stylefeng.guns.modular.kim.utils;
 
+import cn.stylefeng.guns.modular.system.model.CoinResources;
 import cn.stylefeng.guns.modular.system.model.KimResources;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,6 +40,7 @@ public class FileUtils {
         try {
             FileUtils.uploadFile(file.getBytes(), filePath, fileName);
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
         // 返回图片的存放路径
@@ -70,6 +72,29 @@ public class FileUtils {
         return kimResources;
     }
 
+    /**
+     * 将文件保存至CoinResources
+     * @param file  上传文件信息
+     * @param filePath  文件保存路径
+     */
+    public static CoinResources saveCoinResource(MultipartFile file, String filePath) {
+        CoinResources coinResources = new CoinResources();
+        coinResources.setFileCd(GuidUtils.getGuid());
+        //图片名字
+        String fileName = file.getOriginalFilename();
+        coinResources.setFileNm(fileName);
+        //资源类型，图片为2
+        coinResources.setMulTp("2");
+
+        //图片类型
+        String contentType = file.getContentType();
+        coinResources.setFileExt(contentType);
+        coinResources.setFilePath(filePath);
+        coinResources.setTs(GuidUtils.getCreateTime());
+        return coinResources;
+    }
+
+
 
     /**
      *  文件上传工具类服务方法
@@ -89,4 +114,5 @@ public class FileUtils {
         out.flush();
         out.close();
     }
+
 }

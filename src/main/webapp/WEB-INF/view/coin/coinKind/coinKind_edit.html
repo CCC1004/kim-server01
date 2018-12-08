@@ -1,15 +1,17 @@
 @layout("/common/_container.html"){
 <div class="ibox float-e-margins">
     <div class="ibox-content">
-        <div class="form-horizontal">
+        <div class="form-horizontal" id="coinKindInfo">
 
             <div class="row">
                 <div class="col-sm-6 b-r">
-                            <#input id="guid" name="主键uuid" value="${item.guid}" underline="true"/>
+                            <input type="hidden" id="guid" value="${item.guid}" />
+                            <!--<#input id="guid" name="主键uuid" value="${item.guid}" underline="true"/>-->
                             <#input id="kindName" name="品种名称" value="${item.kindName}" underline="true"/>
-                            <#input id="kindValue" name="面值" value="${item.kindValue}" underline="true"/>
+                            <#input id="kindValue" name="面值(元)" value="${item.kindValue}" underline="true"/>
                             <#input id="kindDesc" name="品种描述" value="${item.kindDesc}" underline="true"/>
-                            <#input id="flId" name="精品分类id" value="${item.flId}" underline="true"/>
+                            <!--<#input id="flId" name="精品分类id" value="${item.flId}" underline="true"/>-->
+                            <#input id="flNm" name="精品分类名称" value="${flNm}" readonly="readonly" underline="true"/>
                             <#input id="issueTime" name="发行日期" value="${item.issueTime}" underline="true"/>
                             <#input id="issueSize" name="发行量" value="${item.issueSize}" underline="true"/>
                             <#input id="kindSize" name="规格" value="${item.kindSize}" underline="true"/>
@@ -18,13 +20,17 @@
 
                 <div class="col-sm-6">
                             <#input id="kindPacking" name="品种包装" value="${item.kindPacking}" underline="true"/>
-                            <#input id="nowPriseDown" name="目前价格下限" value="${item.nowPriseDown}" underline="true"/>
-                            <#input id="nowPriseUp" name="目前价格上限" value="${item.nowPriseUp}" underline="true"/>
-                            <#input id="kindImage" name="品种图片1（与资源表id关联）" value="${item.kindImage}" underline="true"/>
-                            <#input id="kindImage2" name="品种图片2" value="${item.kindImage2}" underline="true"/>
-                            <#input id="kindImage3" name="品种图片3" value="${item.kindImage3}" underline="true"/>
-                            <#input id="kindImage4" name="品种图片4" value="${item.kindImage4}" underline="true"/>
-                            <#input id="ts" name="时间戳" value="${item.ts}" underline="true"/>
+                            <#input id="nowPriseDown" name="目前价格下限(元)" value="${item.nowPriseDown}" underline="true"/>
+                            <#input id="nowPriseUp" name="目前价格上限(元)" value="${item.nowPriseUp}" underline="true"/>
+                    <#inputFile type="file" id="kindImage" name="kindImage" label="品种图片1" underline="true" />
+                    <#inputFile type="file" id="kindImage2" name="kindImage2" label="品种图片2" underline="true" />
+                    <#inputFile type="file" id="kindImage3" name="kindImage3" label="品种图片3" underline="true" />
+                    <#inputFile type="file" id="kindImage4" name="kindImage4" label="品种图片4" underline="true" />
+                            <!--<#input id="kindImage" name="品种图片1（与资源表id关联）" value="${item.kindImage}" underline="true"/>-->
+                            <!--<#input id="kindImage2" name="品种图片2" value="${item.kindImage2}" underline="true"/>-->
+                            <!--<#input id="kindImage3" name="品种图片3" value="${item.kindImage3}" underline="true"/>-->
+                            <!--<#input id="kindImage4" name="品种图片4" value="${item.kindImage4}" underline="true"/>-->
+                            <!--<#input id="ts" name="时间戳" value="${item.ts}" underline="true"/>-->
                             <#input id="nt" name="备注" value="${item.nt}" />
                 </div>
             </div>
@@ -40,4 +46,10 @@
     </div>
 </div>
 <script src="${ctxPath}/static/modular/coin/coinKind/coinKind_info.js"></script>
+<script>
+    laydate.render({
+        elem: '#issueTime'
+    });
+</script>
+
 @}
