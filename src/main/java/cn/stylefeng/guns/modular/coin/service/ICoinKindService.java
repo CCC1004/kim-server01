@@ -13,4 +13,6 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface ICoinKindService extends IService<CoinKind> {
 
+
+    boolean deleteKindAndRes(String coinKindId);
 }

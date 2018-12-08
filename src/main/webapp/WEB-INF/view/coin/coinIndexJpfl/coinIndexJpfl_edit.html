@@ -1,21 +1,33 @@
 @layout("/common/_container.html"){
 <div class="ibox float-e-margins">
     <div class="ibox-content">
-        <div class="form-horizontal">
+        <div class="form-horizontal" id="coinIndexJpfl">
 
             <div class="row">
                 <div class="col-sm-6 b-r">
-                            <#input id="guid" name="主键自增" value="${item.guid}" underline="true"/>
+                    <input type="hidden" id="guid" value="${item.guid}">
+                            <!--<#input id="guid" name="主键自增" value="${item.guid}" underline="true"/>-->
                             <#input id="flName" name="分类名称" value="${item.flName}" underline="true"/>
-                            <#input id="flImage" name="分类图片id(与资源信息主键匹配)" value="${item.flImage}" underline="true"/>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label head-scu-label">分类图片</label>
+                        <div class="col-sm-8">
+                            <div><img width="150px" height="150px" src="${ctxPath}${coinResources.filePath}"></div>
+                        </div>
+                    </div>
+                            <!--<#input id="flImage" name="分类图片" value="${item.flImage}" underline="true"/>-->
                             <#input id="flDesc" name="分类描述" value="${item.flDesc}" />
                 </div>
 
                 <div class="col-sm-6">
                             <#input id="flSort" name="排序" value="${item.flSort}" underline="true"/>
-                            <#input id="flStatus" name="是否显示（1显示；2不显示）" value="${item.flStatus}" underline="true"/>
+                            <!--<#input id="flStatus" name="是否显示" value="${item.flStatus}" underline="true"/>-->
+                    <#select id="flStatus" name="是否显示" underline="true">
+                        <option value="">--请选择--</option>
+                        <option value="1">显示</option>
+                        <option value="2">不显示</option>
+                    </#select>
                             <#input id="nt" name="备注" value="${item.nt}" underline="true"/>
-                            <#input id="ts" name="时间戳" value="${item.ts}" />
+                            <!--<#input id="ts" name="时间戳" value="${item.ts}" />-->
                 </div>
             </div>
 
@@ -30,4 +42,9 @@
     </div>
 </div>
 <script src="${ctxPath}/static/modular/coin/coinIndexJpfl/coinIndexJpfl_info.js"></script>
+<script>
+
+    $("#flStatus option[value='${item.flStatus}']").attr("selected","selected");
+
+</script>
 @}

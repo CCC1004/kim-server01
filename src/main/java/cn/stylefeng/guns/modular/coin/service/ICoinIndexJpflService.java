@@ -1,7 +1,12 @@
 package cn.stylefeng.guns.modular.coin.service;
 
 import cn.stylefeng.guns.modular.system.model.CoinIndexJpfl;
+import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.IService;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -14,4 +19,6 @@ import com.baomidou.mybatisplus.service.IService;
 public interface ICoinIndexJpflService extends IService<CoinIndexJpfl> {
 
     boolean deleteByIdAndRes(String coinIndexJpflId);
+
+    List<Map<String,Object>> getCoinJptjPage(Page page, Wrapper<CoinIndexJpfl> wrapper);
 }

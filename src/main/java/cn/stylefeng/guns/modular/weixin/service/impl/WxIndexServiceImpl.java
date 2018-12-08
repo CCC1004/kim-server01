@@ -31,6 +31,9 @@ public class WxIndexServiceImpl implements WxIndexService {
     @Autowired
     KimIndexRmtpMapper kimIndexRmtpMapper;
 
+    @Autowired
+    CoinKindMapper coinKindMapper;
+
 
     /**
      * 获取轮播图列表
@@ -70,5 +73,11 @@ public class WxIndexServiceImpl implements WxIndexService {
     public List<Map<String,Object>> getRmtpList() {
         List<Map<String,Object>> list = kimIndexRmtpMapper.getRmtpList();
         return list;
+    }
+
+    @Override
+    public List<Map<String, Object>> searchKindListByflid(String flid) {
+        List<Map<String,Object>> list = coinKindMapper.searchKindListByflid(flid);
+        return null;
     }
 }

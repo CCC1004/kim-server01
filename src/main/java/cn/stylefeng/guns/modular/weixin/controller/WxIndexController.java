@@ -4,6 +4,7 @@ import cn.stylefeng.guns.core.common.constant.cache.Cache;
 import cn.stylefeng.guns.core.common.constant.cache.CacheKey;
 import cn.stylefeng.guns.modular.weixin.service.WxIndexService;
 import cn.stylefeng.guns.modular.weixin.utils.ResultUtils;
+import cn.stylefeng.roses.core.util.ToolUtil;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,11 +90,16 @@ public class WxIndexController {
 
     /**
      * 根据分类id，获取分类详情列表页
-     *
+     * @param flid 分类id
+     * @return
      */
-    @GetMapping("/searchDetailByGuid")
-    public ResultUtils searchDetailByGuid(){
+    @GetMapping("/searchKindListByflid")
+    public ResultUtils searchKindListByflid(@PathVariable("flid") String flid){
         ResultUtils result = new ResultUtils();
+
+        if(ToolUtil.isNotEmpty(flid)){
+            List<Map<String,Object>> list = wxIndexService.searchKindListByflid(flid);
+        }
 
         return result;
     }

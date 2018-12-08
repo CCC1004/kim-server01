@@ -20,13 +20,33 @@
         <result column="kind_image2" property="kindImage2" />
         <result column="kind_image3" property="kindImage3" />
         <result column="kind_image4" property="kindImage4" />
+        <result column="kind_sort" property="kindSort" />
         <result column="ts" property="ts" />
         <result column="nt" property="nt" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        guid, kind_name, kind_value, kind_desc, fl_id, issue_time, issue_size, kind_size, kind_material, kind_packing, now_prise_down, now_prise_up, kind_image, kind_image2, kind_image3, kind_image4, ts, nt
+        guid, kind_name, kind_value, kind_desc, fl_id, issue_time, issue_size, kind_size, kind_material, kind_packing, now_prise_down, now_prise_up, kind_image, kind_image2, kind_image3, kind_image4, kind_sort, ts, nt
     </sql>
+
+    <!-- map -->
+    <sql id="Base_Column_Map">
+        k.guid as guid, k.kind_name as kindName, k.kind_value as kindValue, k.kind_desc as kindDesc, k.fl_id as flId, k.issue_time as issueTime,
+        k.issue_size as issueSize, k.kind_size as kindSize,
+        k.kind_material as kindMaterial, k.kind_packing as kindPacking, k.now_prise_down as nowPriseDown, k.now_prise_up as ,
+        k.kind_image, k.kind_image2, k.kind_image3, k.kind_image4,
+        k.kind_sort, k.ts, k.nt
+    </sql>
+
+    <select id="searchKindListByflid" resultType="map">
+      select
+       <include refid="Base_Column_Map"/>
+       from coin_kind k join coin_resources r
+        on k.kind_image=r.FILE_CD
+        where 1=1
+        and k.fl_id = #{flid}
+        order by k.kind_sort asc
+    </select>
 
 </mapper>

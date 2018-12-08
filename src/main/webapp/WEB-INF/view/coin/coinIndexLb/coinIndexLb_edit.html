@@ -1,7 +1,7 @@
 @layout("/common/_container.html"){
 <div class="ibox float-e-margins">
     <div class="ibox-content">
-        <div class="form-horizontal">
+        <div class="form-horizontal" id="coinIndexLbInfo">
 
             <input type="hidden" id="guid" value="${item.guid}">
             <div class="row">
@@ -11,7 +11,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label head-scu-label">轮播图片</label>
                         <div class="col-sm-8">
-                            <div><img width="100px" height="100px" src="${ctxPath}${filePath}"></div>
+                            <div><img width="250px" height="150px" src="${ctxPath}${coinResources.filePath}"></div>
                         </div>
                     </div>
                     <!--<#input id="lbImage" name="轮播图片id(与资源信息主键匹配)" value="${item.lbImage}" />-->
@@ -43,4 +43,9 @@
     </div>
 </div>
 <script src="${ctxPath}/static/modular/coin/coinIndexLb/coinIndexLb_info.js"></script>
+<script>
+
+    $("#lbStatus option[value='${item.lbStatus}']").attr("selected","selected");
+
+</script>
 @}

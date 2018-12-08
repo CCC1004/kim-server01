@@ -2,6 +2,8 @@ package cn.stylefeng.guns.modular.coin.controller;
 
 import cn.stylefeng.guns.core.common.constant.cache.Cache;
 import cn.stylefeng.guns.core.common.constant.cache.CacheKey;
+import cn.stylefeng.guns.core.common.constant.factory.PageFactory;
+import cn.stylefeng.guns.core.common.page.PageInfoBT;
 import cn.stylefeng.guns.core.log.LogObjectHolder;
 import cn.stylefeng.guns.core.util.CacheUtil;
 import cn.stylefeng.guns.modular.coin.service.ICoinIndexLbService;
@@ -12,6 +14,10 @@ import cn.stylefeng.guns.modular.system.model.CoinIndexLb;
 import cn.stylefeng.guns.modular.system.model.CoinResources;
 import cn.stylefeng.guns.modular.weixin.properties.PathProperties;
 import cn.stylefeng.roses.core.base.controller.BaseController;
+import cn.stylefeng.roses.core.util.ToolUtil;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Isolation;
@@ -25,6 +31,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 轮播图控制器
@@ -71,6 +79,13 @@ public class CoinIndexLbController extends BaseController {
         CoinIndexLb coinIndexLb = coinIndexLbService.selectById(coinIndexLbId);
         model.addAttribute("item",coinIndexLb);
         LogObjectHolder.me().set(coinIndexLb);
+
+        CoinResources coinResources = new CoinResources();
+        if(ToolUtil.isNotEmpty(coinIndexLb.getLbImage())){
+            coinResources = coinResourcesService.selectById(coinIndexLb.getLbImage());
+        }
+        model.addAttribute("coinResources",coinResources);
+
         return PREFIX + "coinIndexLb_edit.html";
     }
 
@@ -80,7 +95,14 @@ public class CoinIndexLbController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public Object list(String condition) {
-        return coinIndexLbService.selectList(null);
+//        Wrapper<CoinIndexLb> wrapper = new EntityWrapper<CoinIndexLb>();
+//        wrapper.orderBy("lb_sort");
+//        return coinIndexLbService.selectList(wrapper);
+
+        Page<Map<String, Object>> page = new PageFactory<Map<String, Object>>().defaultPage();
+        List<Map<String, Object>> list = coinIndexLbService.getCoinLbPage(page);
+        page.setRecords(list);
+        return new PageInfoBT<>(page);
     }
 
     /**

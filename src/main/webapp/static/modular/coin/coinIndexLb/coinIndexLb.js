@@ -16,13 +16,25 @@ CoinIndexLb.initColumn = function () {
         {field: 'selectItem', radio: true},
         {title: '主键自增', field: 'guid', visible: false, align: 'center', valign: 'middle'},
         {title: '轮播页名称', field: 'lbName', visible: true, align: 'center', valign: 'middle'},
-        {title: '轮播图片id', field: 'lbImage', visible: true, align: 'center', valign: 'middle'},
+        // {title: '轮播图片', field: 'lbImage', visible: true, align: 'center', valign: 'middle'},
+        {title: '轮播图片', field: 'filePath', visible: true, align: 'center', valign: 'middle', formatter: imgFormatter},
         {title: '排序', field: 'lbSort', visible: true, align: 'center', valign: 'middle'},
         {title: '备注', field: 'nt', visible: true, align: 'center', valign: 'middle'},
         {title: '是否显示', field: 'lbStatus', visible: true, align: 'center', valign: 'middle'},
-        {title: '时间戳', field: 'ts', visible: true, align: 'center', valign: 'middle'}
+        {title: '时间戳', field: 'ts', visible: false, align: 'center', valign: 'middle'}
     ];
 };
+
+
+function imgFormatter(value,row,index){
+    var str = '<div class="form-group" style="margin: 0px;padding: 0px;">\n' +
+        '          <div class="col-sm-8">\n' +
+        '               <div><img width="100px" height="50px" src="'+ Feng.ctxPath + value +'"></div>\n' +
+        '          </div>\n' +
+        '      </div>'
+    return str;
+}
+
 
 /**
  * 检查是否选中
@@ -54,7 +66,7 @@ CoinIndexLb.openAddCoinIndexLb = function () {
 };
 
 /**
- * 打开查看轮播图详情
+ * 修改
  */
 CoinIndexLb.openCoinIndexLbDetail = function () {
     if (this.check()) {
@@ -101,6 +113,6 @@ CoinIndexLb.search = function () {
 $(function () {
     var defaultColunms = CoinIndexLb.initColumn();
     var table = new BSTable(CoinIndexLb.id, "/coinIndexLb/list", defaultColunms);
-    table.setPaginationType("client");
+    table.setPaginationType("server");
     CoinIndexLb.table = table.init();
 });

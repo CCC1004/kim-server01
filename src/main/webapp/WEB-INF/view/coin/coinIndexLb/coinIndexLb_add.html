@@ -3,7 +3,7 @@
     <div class="ibox-content">
 
         <form action="/coinIndexLb/addLb" id="uploadForm" method="post" enctype="multipart/form-data">
-            <div class="form-horizontal">
+            <div class="form-horizontal" id="coinIndexLbInfo">
 
                 <div class="row">
                     <div class="col-sm-6 b-r">
@@ -15,17 +15,17 @@
                     <div class="col-sm-6">
                         <#input id="lbSort" name="排序" underline="true"/>
                         <#select id="lbStatus" name="是否显示" underline="true">
-                        <option value="">--请选择--</option>
-                        <option value="1" selected="selected">显示</option>
-                        <option value="2">不显示</option>
-                    </#select>
+                            <option value="">--请选择--</option>
+                            <option value="1" selected="selected">显示</option>
+                            <option value="2">不显示</option>
+                        </#select>
                     <#input id="nt" name="备注" underline="true"/>
                 </div>
             </div>
 
             <div class="row btn-group-m-t">
                 <div class="col-sm-10">
-                    <input type="submit" class="btn btn-success" id="fileSubmit" name="Submit" value="上传" />
+                    <input type="submit" class="btn btn-success" onclick="return CoinIndexLbInfoDlg.validate();" id="fileSubmit" name="Submit" value="提交" />
                     <!--<#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="CoinIndexLbInfoDlg.addSubmit()"/>-->
 
                     <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="CoinIndexLbInfoDlg.close()"/>

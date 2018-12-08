@@ -16,14 +16,24 @@ CoinIndexJpfl.initColumn = function () {
         {field: 'selectItem', radio: true},
             {title: '主键自增', field: 'guid', visible: false, align: 'center', valign: 'middle'},
             {title: '分类名称', field: 'flName', visible: true, align: 'center', valign: 'middle'},
-            {title: '分类图片id', field: 'flImage', visible: false, align: 'center', valign: 'middle'},
+            // {title: '分类图片', field: 'flImage', visible: true, align: 'center', valign: 'middle'},
+            {title: '分类图片', field: 'filePath', visible: true, align: 'center', valign: 'middle', formatter: imgFormatter},
             {title: '分类描述', field: 'flDesc', visible: true, align: 'center', valign: 'middle'},
             {title: '排序', field: 'flSort', visible: true, align: 'center', valign: 'middle'},
             {title: '是否显示', field: 'flStatus', visible: true, align: 'center', valign: 'middle'},
             {title: '备注', field: 'nt', visible: true, align: 'center', valign: 'middle'},
-            {title: '时间戳', field: 'ts', visible: false, align: 'center', valign: 'middle'}
+            // {title: '时间戳', field: 'ts', visible: false, align: 'center', valign: 'middle'}
     ];
 };
+
+function imgFormatter(value,row,index){
+    var str = '<div class="form-group" style="margin: 0px;padding: 0px;">\n' +
+        '          <div class="col-sm-8">\n' +
+        '               <div><img width="50px" height="50px" src="'+ Feng.ctxPath + value +'"></div>\n' +
+        '          </div>\n' +
+        '      </div>'
+    return str;
+}
 
 /**
  * 检查是否选中
@@ -102,6 +112,6 @@ CoinIndexJpfl.search = function () {
 $(function () {
     var defaultColunms = CoinIndexJpfl.initColumn();
     var table = new BSTable(CoinIndexJpfl.id, "/coinIndexJpfl/list", defaultColunms);
-    table.setPaginationType("client");
+    table.setPaginationType("server");
     CoinIndexJpfl.table = table.init();
 });

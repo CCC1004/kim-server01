@@ -31,24 +31,31 @@ var CoinKindInfoDlg = {
                 },
             }
         },
-        flId: {
-            validators: {
-                notEmpty: {
-                    message: '精品分类不能为空'
-                },
-            }
-        },
-        issueTime: {
-            validators: {
-                notEmpty: {
-                    message: '发行日期不能为空'
-                },
-            }
-        },
+        // issueTime: {
+        //     validators: {
+        //         notEmpty: {
+        //             message: '发行日期不能为空'
+        //         },
+        //     }
+        // },
         issueSize: {
             validators: {
                 notEmpty: {
                     message: '发行量不能为空'
+                },
+            }
+        },
+        kindSort: {
+            validators: {
+                notEmpty: {
+                    message: '排序不能为空'
+                },
+            }
+        },
+        img: {
+            validators: {
+                notEmpty: {
+                    message: '品种图片1不能为空'
                 },
             }
         },
@@ -112,6 +119,7 @@ CoinKindInfoDlg.collectData = function() {
     .set('kindImage2')
     .set('kindImage3')
     .set('kindImage4')
+    .set('kindSort')
     .set('ts')
     .set('nt');
 }

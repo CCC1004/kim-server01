@@ -8,10 +8,14 @@ import cn.stylefeng.guns.modular.coin.service.ICoinIndexLbService;
 import cn.stylefeng.guns.modular.system.model.CoinResources;
 import cn.stylefeng.guns.modular.system.model.KimResources;
 import cn.stylefeng.roses.core.util.ToolUtil;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -33,12 +37,17 @@ public class CoinIndexLbServiceImpl extends ServiceImpl<CoinIndexLbMapper, CoinI
 
         CoinIndexLb coinIndexLb = this.baseMapper.selectById(coinIndexLbId);
         boolean b = this.deleteById(coinIndexLbId);
-        if(b && ToolUtil.isNotEmpty(coinIndexLb)){
+        if(b && ToolUtil.isNotEmpty(coinIndexLb) && ToolUtil.isNotEmpty(coinIndexLb.getLbImage())){
             CoinResources coinResources = coinResourcesMapper.selectById(coinIndexLb.getLbImage());
             if(ToolUtil.isNotEmpty(coinResources)){
                 coinResourcesMapper.deleteById(coinIndexLb.getLbImage());
             }
         }
 
+    }
+
+    @Override
+    public List<Map<String, Object>> getCoinLbPage(Page page) {
+        return this.baseMapper.getCoinLbPage(page);
     }
 }

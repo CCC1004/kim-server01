@@ -2,7 +2,41 @@
  * 初始化精品分类详情对话框
  */
 var CoinIndexJpflInfoDlg = {
-    coinIndexJpflInfoData : {}
+    coinIndexJpflInfoData : {},
+    validateFields: {
+        flName: {
+            validators: {
+                notEmpty: {
+                    message: '分类名称不能为空'
+                },
+
+            }
+        },
+        file: {
+            validators: {
+                notEmpty: {
+                    message: '分类图片不能为空'
+                },
+
+            }
+        },
+        flSort: {
+            validators: {
+                notEmpty: {
+                    message: '排序不能为空'
+                },
+
+            }
+        },
+        flStatus: {
+            validators: {
+                notEmpty: {
+                    message: '是否显示不能为空'
+                },
+
+            }
+        },
+    }
 };
 
 /**
@@ -63,6 +97,11 @@ CoinIndexJpflInfoDlg.addSubmit = function() {
     this.clearData();
     this.collectData();
 
+    //验证
+    if (!this.validate()) {
+        return;
+    }
+
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/coinIndexJpfl/add", function(data){
         Feng.success("添加成功!");
@@ -83,6 +122,11 @@ CoinIndexJpflInfoDlg.editSubmit = function() {
     this.clearData();
     this.collectData();
 
+    //验证
+    if (!this.validate()) {
+        return;
+    }
+
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/coinIndexJpfl/update", function(data){
         Feng.success("修改成功!");
@@ -95,6 +139,19 @@ CoinIndexJpflInfoDlg.editSubmit = function() {
     ajax.start();
 }
 
+
+/**
+ * 验证数据是否为空
+ */
+CoinIndexJpflInfoDlg.validate = function () {
+    $('#coinIndexJpfl').data("bootstrapValidator").resetForm();
+    $('#coinIndexJpfl').bootstrapValidator('validate');
+    return $("#coinIndexJpfl").data('bootstrapValidator').isValid();
+}
+
 $(function() {
+
+    //验证
+    Feng.initValidator("coinIndexJpfl", CoinIndexJpflInfoDlg.validateFields);
 
 });

@@ -22,14 +22,23 @@
 
     <!-- map查询结果 -->
     <sql id="Base_Column_List2">
-        j.guid as guid, j.fl_name as flName, j.fl_desc as flDesc, j.fl_image as flImage, r.FILE_PATH as filePath
+        j.guid as guid, j.fl_name as flName, j.fl_image as flImage, j.fl_desc as flDesc, j.fl_sort as flSort,
+        j.nt as nt, j.ts as ts, r.FILE_PATH as filePath
     </sql>
 
     <select id="getCoinJptjList" resultType="map">
         select
         <include refid="Base_Column_List2" />
-        from coin_index_jpfl j join coin_resources r
-        where j.fl_image=r.FILE_CD
+        from coin_index_jpfl j join coin_resources r on j.fl_image=r.FILE_CD
+        where j.fl_status=1
+        order by j.fl_sort asc
+    </select>
+
+    <select id="getCoinJptjPage" resultType="map">
+        select
+        <include refid="Base_Column_List2" />
+        from coin_index_jpfl j join coin_resources r on j.fl_image=r.FILE_CD
+        where j.fl_status=1
         order by j.fl_sort asc
     </select>
 

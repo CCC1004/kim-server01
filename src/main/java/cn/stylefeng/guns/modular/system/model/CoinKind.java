@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import java.io.Serializable;
 
@@ -12,8 +13,8 @@ import java.io.Serializable;
  * 品种信息表
  * </p>
  *
- * @author superc
- * @since 2018-12-07
+ * @author stylefeng
+ * @since 2018-12-08
  */
 @TableName("coin_kind")
 public class CoinKind extends Model<CoinKind> {
@@ -23,6 +24,7 @@ public class CoinKind extends Model<CoinKind> {
     /**
      * 主键uuid
      */
+    @TableId("GUID")
     private String guid;
     /**
      * 品种名称
@@ -99,6 +101,11 @@ public class CoinKind extends Model<CoinKind> {
      */
     @TableField("kind_image4")
     private String kindImage4;
+    /**
+     * 排序
+     */
+    @TableField("kind_sort")
+    private String kindSort;
     /**
      * 时间戳
      */
@@ -237,6 +244,14 @@ public class CoinKind extends Model<CoinKind> {
         this.kindImage4 = kindImage4;
     }
 
+    public String getKindSort() {
+        return kindSort;
+    }
+
+    public void setKindSort(String kindSort) {
+        this.kindSort = kindSort;
+    }
+
     public Date getTs() {
         return ts;
     }
@@ -277,6 +292,7 @@ public class CoinKind extends Model<CoinKind> {
         ", kindImage2=" + kindImage2 +
         ", kindImage3=" + kindImage3 +
         ", kindImage4=" + kindImage4 +
+        ", kindSort=" + kindSort +
         ", ts=" + ts +
         ", nt=" + nt +
         "}";

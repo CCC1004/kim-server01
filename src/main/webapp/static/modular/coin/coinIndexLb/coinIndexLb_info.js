@@ -2,7 +2,41 @@
  * 初始化轮播图详情对话框
  */
 var CoinIndexLbInfoDlg = {
-    coinIndexLbInfoData : {}
+    coinIndexLbInfoData : {},
+    validateFields: {
+        lbName: {
+            validators: {
+                notEmpty: {
+                    message: '名称不能为空'
+                },
+
+            }
+        },
+        file: {
+            validators: {
+                notEmpty: {
+                    message: '轮播图片不能为空'
+                },
+
+            }
+        },
+        lbSort: {
+            validators: {
+                notEmpty: {
+                    message: '排序不能为空'
+                },
+
+            }
+        },
+        lbStatus: {
+            validators: {
+                notEmpty: {
+                    message: '是否显示不能为空'
+                },
+
+            }
+        },
+    }
 };
 
 /**
@@ -62,6 +96,11 @@ CoinIndexLbInfoDlg.addSubmit = function() {
     this.clearData();
     this.collectData();
 
+    //验证
+    if (!this.validate()) {
+        return;
+    }
+
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/coinIndexLb/add", function(data){
         Feng.success("添加成功!");
@@ -82,6 +121,11 @@ CoinIndexLbInfoDlg.editSubmit = function() {
     this.clearData();
     this.collectData();
 
+    //验证
+    if (!this.validate()) {
+        return;
+    }
+
     //提交信息
     var ajax = new $ax(Feng.ctxPath + "/coinIndexLb/update", function(data){
         Feng.success("修改成功!");
@@ -94,6 +138,19 @@ CoinIndexLbInfoDlg.editSubmit = function() {
     ajax.start();
 }
 
+
+/**
+ * 验证数据是否为空
+ */
+CoinIndexLbInfoDlg.validate = function () {
+    $('#coinIndexLbInfo').data("bootstrapValidator").resetForm();
+    $('#coinIndexLbInfo').bootstrapValidator('validate');
+    return $("#coinIndexLbInfo").data('bootstrapValidator').isValid();
+}
+
+
 $(function() {
 
+    //验证
+    Feng.initValidator("coinIndexLbInfo", CoinIndexLbInfoDlg.validateFields);
 });

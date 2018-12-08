@@ -15,7 +15,8 @@
                             <#input id="issueTime" name="发行日期" value="${item.issueTime}" underline="true"/>
                             <#input id="issueSize" name="发行量" value="${item.issueSize}" underline="true"/>
                             <#input id="kindSize" name="规格" value="${item.kindSize}" underline="true"/>
-                            <#input id="kindMaterial" name="材质" value="${item.kindMaterial}" />
+                            <#input id="kindMaterial" name="材质" value="${item.kindMaterial}" underline="true"/>
+                            <#input id="kindSort" name="排序" value="${item.kindSort}" underline="true"/>
                 </div>
 
                 <div class="col-sm-6">
@@ -37,7 +38,8 @@
 
             <div class="row btn-group-m-t">
                 <div class="col-sm-10">
-                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="CoinKindInfoDlg.editSubmit()"/>
+                    <input type="submit" class="btn btn-success" id="fileSubmit" name="Submit" value="上传" />
+                    <!--<#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="CoinKindInfoDlg.editSubmit()"/>-->
                     <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="CoinKindInfoDlg.close()"/>
                 </div>
             </div>

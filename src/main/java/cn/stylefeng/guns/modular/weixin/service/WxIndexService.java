@@ -41,6 +41,6 @@ public interface WxIndexService {
     List<Map<String,Object>> getRmtpList();
 
 
-
+    List<Map<String, Object>> searchKindListByflid(String flid);
 }
 
