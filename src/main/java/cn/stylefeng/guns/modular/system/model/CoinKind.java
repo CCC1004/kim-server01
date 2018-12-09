@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 
 /**
@@ -35,12 +37,27 @@ public class CoinKind extends Model<CoinKind> {
      * 面值
      */
     @TableField("kind_value")
-    private Integer kindValue;
+    private String kindValue;
     /**
      * 品种描述
      */
     @TableField("kind_desc")
     private String kindDesc;
+    /**
+     * 发行机构
+     */
+    @TableField("kind_org")
+    private String kindOrg;
+    /**
+     * 正面
+     */
+    @TableField("kind_head")
+    private String kindHead;
+    /**
+     * 背面
+     */
+    @TableField("kind_tail")
+    private String kindTail;
     /**
      * 精品分类id
      */
@@ -50,6 +67,7 @@ public class CoinKind extends Model<CoinKind> {
      * 发行日期
      */
     @TableField("issue_time")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date issueTime;
     /**
      * 发行量
@@ -132,11 +150,11 @@ public class CoinKind extends Model<CoinKind> {
         this.kindName = kindName;
     }
 
-    public Integer getKindValue() {
+    public String getKindValue() {
         return kindValue;
     }
 
-    public void setKindValue(Integer kindValue) {
+    public void setKindValue(String kindValue) {
         this.kindValue = kindValue;
     }
 
@@ -268,6 +286,30 @@ public class CoinKind extends Model<CoinKind> {
         this.nt = nt;
     }
 
+    public String getKindHead() {
+        return kindHead;
+    }
+
+    public void setKindHead(String kindHead) {
+        this.kindHead = kindHead;
+    }
+
+    public String getKindTail() {
+        return kindTail;
+    }
+
+    public void setKindTail(String kindTail) {
+        this.kindTail = kindTail;
+    }
+
+    public String getKindOrg() {
+        return kindOrg;
+    }
+
+    public void setKindOrg(String kindOrg) {
+        this.kindOrg = kindOrg;
+    }
+
     @Override
     protected Serializable pkVal() {
         return this.guid;
@@ -276,25 +318,28 @@ public class CoinKind extends Model<CoinKind> {
     @Override
     public String toString() {
         return "CoinKind{" +
-        ", guid=" + guid +
-        ", kindName=" + kindName +
-        ", kindValue=" + kindValue +
-        ", kindDesc=" + kindDesc +
-        ", flId=" + flId +
-        ", issueTime=" + issueTime +
-        ", issueSize=" + issueSize +
-        ", kindSize=" + kindSize +
-        ", kindMaterial=" + kindMaterial +
-        ", kindPacking=" + kindPacking +
-        ", nowPriseDown=" + nowPriseDown +
-        ", nowPriseUp=" + nowPriseUp +
-        ", kindImage=" + kindImage +
-        ", kindImage2=" + kindImage2 +
-        ", kindImage3=" + kindImage3 +
-        ", kindImage4=" + kindImage4 +
-        ", kindSort=" + kindSort +
-        ", ts=" + ts +
-        ", nt=" + nt +
-        "}";
+                "guid='" + guid + '\'' +
+                ", kindName='" + kindName + '\'' +
+                ", kindValue='" + kindValue + '\'' +
+                ", kindDesc='" + kindDesc + '\'' +
+                ", kindOrg='" + kindOrg + '\'' +
+                ", kindHead='" + kindHead + '\'' +
+                ", kindTail='" + kindTail + '\'' +
+                ", flId='" + flId + '\'' +
+                ", issueTime=" + issueTime +
+                ", issueSize='" + issueSize + '\'' +
+                ", kindSize='" + kindSize + '\'' +
+                ", kindMaterial='" + kindMaterial + '\'' +
+                ", kindPacking='" + kindPacking + '\'' +
+                ", nowPriseDown=" + nowPriseDown +
+                ", nowPriseUp=" + nowPriseUp +
+                ", kindImage='" + kindImage + '\'' +
+                ", kindImage2='" + kindImage2 + '\'' +
+                ", kindImage3='" + kindImage3 + '\'' +
+                ", kindImage4='" + kindImage4 + '\'' +
+                ", kindSort='" + kindSort + '\'' +
+                ", ts=" + ts +
+                ", nt='" + nt + '\'' +
+                '}';
     }
 }

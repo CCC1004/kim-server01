@@ -96,6 +96,12 @@ public class CoinKindController extends BaseController {
         }
         model.addAttribute("flNm",flNm);
 
+        CoinResources coinResources = new CoinResources();
+        if(ToolUtil.isNotEmpty(coinKind.getKindImage())){
+            coinResources = coinResourcesService.selectById(coinKind.getKindImage());
+        }
+        model.addAttribute("coinResources",coinResources);
+
         return PREFIX + "coinKind_edit.html";
     }
 

@@ -8,6 +8,9 @@
         <result column="kind_name" property="kindName" />
         <result column="kind_value" property="kindValue" />
         <result column="kind_desc" property="kindDesc" />
+        <result column="kind_org" property="kindOrg" />
+        <result column="kind_head" property="kindHead" />
+        <result column="kind_tail" property="kindTail" />
         <result column="fl_id" property="flId" />
         <result column="issue_time" property="issueTime" />
         <result column="issue_size" property="issueSize" />
@@ -27,21 +30,23 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        guid, kind_name, kind_value, kind_desc, fl_id, issue_time, issue_size, kind_size, kind_material, kind_packing, now_prise_down, now_prise_up, kind_image, kind_image2, kind_image3, kind_image4, kind_sort, ts, nt
+        guid, kind_name, kind_value, kind_desc, kind_org, kind_head, kind_fail, fl_id, issue_time, issue_size,
+        kind_size, kind_material, kind_packing, now_prise_down, now_prise_up, kind_image, kind_image2, kind_image3, kind_image4, kind_sort, ts, nt
     </sql>
 
     <!-- map -->
     <sql id="Base_Column_Map">
-        k.guid as guid, k.kind_name as kindName, k.kind_value as kindValue, k.kind_desc as kindDesc, k.fl_id as flId, k.issue_time as issueTime,
-        k.issue_size as issueSize, k.kind_size as kindSize,
-        k.kind_material as kindMaterial, k.kind_packing as kindPacking, k.now_prise_down as nowPriseDown, k.now_prise_up as ,
-        k.kind_image, k.kind_image2, k.kind_image3, k.kind_image4,
-        k.kind_sort, k.ts, k.nt
+        k.guid as guid, k.kind_name as kindName, k.kind_value as kindValue, k.kind_desc as kindDesc,
+        kind_org as kindOrg, kind_head as kindHead, kind_tail as KindTail, k.fl_id as flId,
+        DATE_FORMAT(k.issue_time,'%Y-%m-%d') as issueTime, k.issue_size as issueSize, k.kind_size as kindSize,k.kind_material as kindMaterial,
+        k.kind_packing as kindPacking, k.now_prise_down as nowPriseDown, k.now_prise_up as nowPriseUp,
+        k.kind_image as kindImage, k.kind_image2 as kindImage2, k.kind_image3 as kindImage3, k.kind_image4 as kindImage4,
+        k.kind_sort as kindSort, k.ts as ts, k.nt as nt, r.FILE_PATH as filePath
     </sql>
 
     <select id="searchKindListByflid" resultType="map">
-      select
-       <include refid="Base_Column_Map"/>
+       select
+        <include refid="Base_Column_Map"/>
        from coin_kind k join coin_resources r
         on k.kind_image=r.FILE_CD
         where 1=1

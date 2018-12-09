@@ -10,20 +10,24 @@
                         <#input id="kindName" name="品种名称" underline="true"/>
                         <#input id="kindValue" name="面值(元)" underline="true"/>
                         <#input id="kindDesc" name="品种描述" underline="true"  placeholder="例：行书普通纪念币"/>
-                        <#select id="flId" name="精品分类" underline="true">
-                            <option value="" disabled selected hidden>--请选择--</option>
-                            @for(item in flList){
-                                <option value="${item.guid}">${item.flName}</option>
-                            @}
-                        </#select>
-                        <!--<#input id="issueTime" name="发行日期" underline="true" placeholder="例：2018.12.29"/>-->
+                        <#input id="kindOrg" name="发行机构" underline="true"/>
+                        <#input id="kindHead" name="正面" underline="true"/>
+                        <#input id="kindTail" name="背面" underline="true"/>
+                    <#input id="issueTime" name="发行日期" underline="true"/>
                         <#input id="issueSize" name="发行量(张/枚)" underline="true" placeholder="例：6000万"/>
                         <#input id="kindSize" name="规格" underline="true" placeholder="例：直径30毫米"/>
                         <#input id="kindMaterial" name="材质" underline="true" placeholder="例：黄铜合金"/>
-                        <#input id="kindSort" name="排序" underline="true" placeholder="例：101"/>
+
                     </div>
 
                     <div class="col-sm-6">
+                        <#select id="flId" name="精品分类" underline="true">
+                            <option value="" disabled selected hidden>--请选择--</option>
+                            @for(item in flList){
+                            <option value="${item.guid}">${item.flName}</option>
+                            @}
+                        </#select>
+                        <#input id="kindSort" name="排序" underline="true" placeholder="例：101"/>
                         <#input id="kindPacking" name="品种包装" underline="true" placeholder="例：整刀100张、一卷20枚"/>
                         <#input id="nowPriseDown" name="目前价格下限(元)" underline="true"/>
                         <#input id="nowPriseUp" name="目前价格上限(元)" underline="true"/>
@@ -48,10 +52,10 @@
     </div>
 </div>
 <script src="${ctxPath}/static/modular/coin/coinKind/coinKind_info.js"></script>
-<script>
-    // laydate.render({
-    //     elem: '#issueTime'
-    // });
+<script type="text/javascript">
+    laydate.render({
+        elem: '#issueTime'
+    });
 </script>
 
 @}

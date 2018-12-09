@@ -78,6 +78,6 @@ public class WxIndexServiceImpl implements WxIndexService {
     @Override
     public List<Map<String, Object>> searchKindListByflid(String flid) {
         List<Map<String,Object>> list = coinKindMapper.searchKindListByflid(flid);
-        return null;
+        return list;
     }
 }

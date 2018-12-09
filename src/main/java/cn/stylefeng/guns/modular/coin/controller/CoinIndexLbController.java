@@ -173,6 +173,7 @@ public class CoinIndexLbController extends BaseController {
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object update(CoinIndexLb coinIndexLb) {
+        coinIndexLb.setTs(GuidUtils.getCreateTime());
         coinIndexLbService.updateById(coinIndexLb);
         //删除缓存数据
         CacheUtil.remove(Cache.INDEX, CacheKey.WX_INDEX_LB+"2");

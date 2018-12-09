@@ -10,10 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -89,16 +86,22 @@ public class WxIndexController {
 
 
     /**
-     * 根据分类id，获取分类详情列表页
+     * 根据分类id，获取品种列表页
      * @param flid 分类id
      * @return
      */
     @GetMapping("/searchKindListByflid")
-    public ResultUtils searchKindListByflid(@PathVariable("flid") String flid){
+    public ResultUtils searchKindListByflid(@RequestParam("flid") String flid){
         ResultUtils result = new ResultUtils();
 
         if(ToolUtil.isNotEmpty(flid)){
             List<Map<String,Object>> list = wxIndexService.searchKindListByflid(flid);
+
+            if(list!=null && list.size()>0){
+                result = ResultUtils.ok(list);
+            }else{
+                result = ResultUtils.errorMsg("数据为空");
+            }
         }
 
         return result;

@@ -17,16 +17,18 @@ CoinKind.initColumn = function () {
             // {title: '主键uuid', field: 'guid', visible: true, align: 'center', valign: 'middle'},
             {title: '品种名称', field: 'kindName', visible: true, align: 'center', valign: 'middle'},
             {title: '面值(元)', field: 'kindValue', visible: true, align: 'center', valign: 'middle'},
-            {title: '品种描述', field: 'kindDesc', visible: true, align: 'center', valign: 'middle'},
+            {title: '品种描述', field: 'kindDesc', visible: false, align: 'center', valign: 'middle'},
+            {title: '正面', field: 'kindHead', visible: false, align: 'center', valign: 'middle'},
+            {title: '背面', field: 'kindTail', visible: false, align: 'center', valign: 'middle'},
             {title: '精品分类id', field: 'flId', visible: true, align: 'center', valign: 'middle'},
-            {title: '发行日期', field: 'issueTime', visible: true, align: 'center', valign: 'middle'},
+            {title: '发行日期', field: 'issueTime', visible: true, align: 'center', valign: 'middle',formatter: timeFormatter},
             {title: '发行量', field: 'issueSize', visible: true, align: 'center', valign: 'middle'},
             {title: '规格', field: 'kindSize', visible: true, align: 'center', valign: 'middle'},
             {title: '材质', field: 'kindMaterial', visible: true, align: 'center', valign: 'middle'},
-            {title: '品种包装', field: 'kindPacking', visible: true, align: 'center', valign: 'middle'},
+            {title: '品种包装', field: 'kindPacking', visible: false, align: 'center', valign: 'middle'},
             {title: '目前价格下限(元)', field: 'nowPriseDown', visible: true, align: 'center', valign: 'middle'},
-            {title: '目前价格上限(元)', field: 'nowPriseUp', visible: false, align: 'center', valign: 'middle'},
-            // {title: '品种图片1（与资源表id关联）', field: 'kindImage', visible: true, align: 'center', valign: 'middle'},
+            {title: '目前价格上限(元)', field: 'nowPriseUp', visible: true, align: 'center', valign: 'middle'},
+            // {title: '品种图片1', field: 'kindImage', visible: true, align: 'center', valign: 'middle'},
             // {title: '品种图片2', field: 'kindImage2', visible: true, align: 'center', valign: 'middle'},
             // {title: '品种图片3', field: 'kindImage3', visible: true, align: 'center', valign: 'middle'},
             // {title: '品种图片4', field: 'kindImage4', visible: true, align: 'center', valign: 'middle'},
@@ -35,6 +37,11 @@ CoinKind.initColumn = function () {
             // {title: '备注', field: 'nt', visible: true, align: 'center', valign: 'middle'}
     ];
 };
+
+function timeFormatter(value,row,index){
+    var str = value.split(" ",1);
+    return str;
+}
 
 /**
  * 检查是否选中

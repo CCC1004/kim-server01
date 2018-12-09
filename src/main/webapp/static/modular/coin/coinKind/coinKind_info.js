@@ -31,13 +31,13 @@ var CoinKindInfoDlg = {
                 },
             }
         },
-        // issueTime: {
-        //     validators: {
-        //         notEmpty: {
-        //             message: '发行日期不能为空'
-        //         },
-        //     }
-        // },
+        issueTime: {
+            validators: {
+                notEmpty: {
+                    message: '发行日期不能为空'
+                },
+            }
+        },
         issueSize: {
             validators: {
                 notEmpty: {
@@ -107,6 +107,9 @@ CoinKindInfoDlg.collectData = function() {
     .set('kindName')
     .set('kindValue')
     .set('kindDesc')
+    .set('kindOrg')
+    .set('kindHead')
+    .set('kindTail')
     .set('flId')
     .set('issueTime')
     .set('issueSize')
