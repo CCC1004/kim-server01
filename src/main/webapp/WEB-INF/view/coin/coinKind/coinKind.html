@@ -10,7 +10,18 @@
                     <div class="col-sm-12">
                         <div class="row">
                             <div class="col-sm-3">
-                                <#NameCon id="condition" name="名称" />
+                                <#NameCon id="kindName" name="品种名称" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#NameCon id="kindValue" name="面值" />
+                            </div>
+                            <div class="col-sm-3">
+                                <#SelectCon id="flId" name="精品分类" >
+                                    <option value="">--请选择--</option>
+                                    @for(item in jpflList){
+                                        <option value="${item.guid}">${item.flName}</option>
+                                    @}
+                                </#SelectCon>
                             </div>
                             <div class="col-sm-3">
                                 <#button name="搜索" icon="fa-search" clickFun="CoinKind.search()"/>

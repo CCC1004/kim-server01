@@ -1,5 +1,7 @@
 package cn.stylefeng.guns.modular.coin.controller;
 
+import cn.stylefeng.guns.core.common.constant.factory.PageFactory;
+import cn.stylefeng.guns.core.common.page.PageInfoBT;
 import cn.stylefeng.guns.core.log.LogObjectHolder;
 import cn.stylefeng.guns.modular.coin.service.ICoinIndexJpflService;
 import cn.stylefeng.guns.modular.coin.service.ICoinKindService;
@@ -15,6 +17,7 @@ import cn.stylefeng.roses.core.base.controller.BaseController;
 import cn.stylefeng.roses.core.util.ToolUtil;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Isolation;
@@ -28,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -62,7 +66,12 @@ public class CoinKindController extends BaseController {
      * 跳转到品种信息首页
      */
     @RequestMapping("")
-    public String index() {
+    public String index(Model model) {
+        Wrapper<CoinIndexJpfl> wrapper = new EntityWrapper<CoinIndexJpfl>();
+        wrapper.orderBy("fl_sort");
+        List<CoinIndexJpfl> jpflList = coinIndexJpflService.selectList(wrapper);
+        model.addAttribute("jpflList",jpflList) ;
+
         return PREFIX + "coinKind.html";
     }
 
@@ -110,11 +119,19 @@ public class CoinKindController extends BaseController {
      */
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Object list(String condition) {
-        Wrapper<CoinKind> wrapper = new EntityWrapper<CoinKind>();
-        wrapper.orderBy("fl_id");
-        wrapper.orderBy("kind_sort");
-        return coinKindService.selectList(wrapper);
+    public Object list(@RequestParam(required = false) String kindName,
+                       @RequestParam(required = false) String kindValue,
+                       @RequestParam(required = false) String flId) {
+//        Wrapper<CoinKind> wrapper = new EntityWrapper<CoinKind>();
+//        wrapper.orderBy("fl_id");
+//        wrapper.orderBy("kind_sort");
+//        return coinKindService.selectList(wrapper);
+
+        Page<Map<String,Object>> page = new PageFactory<Map<String,Object>>().defaultPage();
+        List<Map<String, Object>> list = coinKindService.selectKindPage(page, kindName, kindValue, flId);
+        page.setRecords(list);
+        return new PageInfoBT<>(page);
+
     }
 
     /**

@@ -20,8 +20,10 @@ CoinKind.initColumn = function () {
             {title: '品种描述', field: 'kindDesc', visible: false, align: 'center', valign: 'middle'},
             {title: '正面', field: 'kindHead', visible: false, align: 'center', valign: 'middle'},
             {title: '背面', field: 'kindTail', visible: false, align: 'center', valign: 'middle'},
-            {title: '精品分类id', field: 'flId', visible: true, align: 'center', valign: 'middle'},
-            {title: '发行日期', field: 'issueTime', visible: true, align: 'center', valign: 'middle',formatter: timeFormatter},
+            // {title: '精品分类id', field: 'flId', visible: true, align: 'center', valign: 'middle'},
+            {title: '精品分类', field: 'flName', visible: true, align: 'center', valign: 'middle'},
+            {title: '发行日期', field: 'issueTime', visible: true, align: 'center', valign: 'middle'},
+            // {title: '发行日期', field: 'issueTime', visible: true, align: 'center', valign: 'middle',formatter: timeFormatter},
             {title: '发行量', field: 'issueSize', visible: true, align: 'center', valign: 'middle'},
             {title: '规格', field: 'kindSize', visible: true, align: 'center', valign: 'middle'},
             {title: '材质', field: 'kindMaterial', visible: true, align: 'center', valign: 'middle'},
@@ -109,17 +111,32 @@ CoinKind.delete = function () {
 };
 
 /**
+ * 模糊查询参数
+ * @returns {{}}
+ */
+CoinKind.formParams = function() {
+    var queryData = {};
+    queryData['kindName'] = $("#kindName").val();
+    queryData['kindValue'] = $("#kindValue").val();
+    queryData['flId'] = $("#flId").val();
+
+    return queryData;
+}
+
+/**
  * 查询品种信息列表
  */
 CoinKind.search = function () {
     var queryData = {};
-    queryData['condition'] = $("#condition").val();
+    queryData = CoinKind.formParams();
     CoinKind.table.refresh({query: queryData});
 };
 
 $(function () {
     var defaultColunms = CoinKind.initColumn();
     var table = new BSTable(CoinKind.id, "/coinKind/list", defaultColunms);
-    table.setPaginationType("client");
+    table.setPaginationType("server");
+    //查询条件参数
+    table.setQueryParams(CoinKind.formParams());
     CoinKind.table = table.init();
 });

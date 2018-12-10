@@ -6,10 +6,14 @@ import cn.stylefeng.guns.modular.system.dao.CoinKindMapper;
 import cn.stylefeng.guns.modular.coin.service.ICoinKindService;
 import cn.stylefeng.guns.modular.system.model.CoinResources;
 import cn.stylefeng.roses.core.util.ToolUtil;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -61,5 +65,11 @@ public class CoinKindServiceImpl extends ServiceImpl<CoinKindMapper, CoinKind> i
             return false;
         }
 
+    }
+
+    @Override
+    public List<Map<String, Object>> selectKindPage(Page page, String kindName, String kindValue, String flId) {
+
+        return this.baseMapper.selectKindPage(page, kindName, kindValue, flId);
     }
 }

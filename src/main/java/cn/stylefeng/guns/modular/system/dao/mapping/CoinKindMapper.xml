@@ -38,10 +38,19 @@
     <sql id="Base_Column_Map">
         k.guid as guid, k.kind_name as kindName, k.kind_value as kindValue, k.kind_desc as kindDesc,
         kind_org as kindOrg, kind_head as kindHead, kind_tail as KindTail, k.fl_id as flId,
-        DATE_FORMAT(k.issue_time,'%Y-%m-%d') as issueTime, k.issue_size as issueSize, k.kind_size as kindSize,k.kind_material as kindMaterial,
+        DATE_FORMAT(k.issue_time,'%Y-%m-%d')  as issueTime, k.issue_size as issueSize, k.kind_size as kindSize,k.kind_material as kindMaterial,
         k.kind_packing as kindPacking, k.now_prise_down as nowPriseDown, k.now_prise_up as nowPriseUp,
         k.kind_image as kindImage, k.kind_image2 as kindImage2, k.kind_image3 as kindImage3, k.kind_image4 as kindImage4,
         k.kind_sort as kindSort, k.ts as ts, k.nt as nt, r.FILE_PATH as filePath
+    </sql>
+
+    <!-- page -->
+    <sql id="Base_Column_Page">
+        k.guid as guid, k.kind_name as kindName, k.kind_value as kindValue, k.kind_desc as kindDesc,
+        kind_org as kindOrg, kind_head as kindHead, kind_tail as KindTail, k.fl_id as flId,
+        DATE_FORMAT(k.issue_time,'%Y-%m-%d')  as issueTime, k.issue_size as issueSize, k.kind_size as kindSize,k.kind_material as kindMaterial,
+        k.kind_packing as kindPacking, k.now_prise_down as nowPriseDown, k.now_prise_up as nowPriseUp,
+        f.fl_name as flName
     </sql>
 
     <select id="searchKindListByflid" resultType="map">
@@ -53,5 +62,23 @@
         and k.fl_id = #{flid}
         order by k.kind_sort asc
     </select>
+
+    <select id="selectKindPage" resultType="map">
+        SELECT
+        <include refid="Base_Column_Page"/>
+        FROM coin_kind k INNER JOIN coin_index_jpfl f ON k.fl_id=f.guid
+        WHERE 1=1
+        <if test="kindName != null and kindName != ''">
+            and k.kind_name like CONCAT('%',#{kindName},'%')
+        </if>
+        <if test="kindValue != null and kindValue != ''">
+            and k.kind_value like CONCAT('%',#{kindValue},'%')
+        </if>
+        <if test="flId != null and flId != ''">
+            and k.fl_id = #{flId}
+        </if>
+        ORDER BY k.fl_id, k.kind_sort
+    </select>
+
 
 </mapper>
