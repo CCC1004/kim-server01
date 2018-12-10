@@ -177,7 +177,7 @@ public class CoinKindController extends BaseController {
             CoinResources coinResources2 = FileUtils.saveCoinResource(img2File,imgFilePath2);
             coinResourcesService.insert(coinResources2);
             //设置图片资源guid
-            coinKind.setKindImage(coinResources2.getFileCd());
+            coinKind.setKindImage2(coinResources2.getFileCd());
         }
 
         //上传品种图片2
@@ -187,7 +187,7 @@ public class CoinKindController extends BaseController {
             CoinResources coinResources3 = FileUtils.saveCoinResource(img3File,imgFilePath3);
             coinResourcesService.insert(coinResources3);
             //设置图片资源guid
-            coinKind.setKindImage(coinResources3.getFileCd());
+            coinKind.setKindImage3(coinResources3.getFileCd());
         }
 
         //上传品种图片2
@@ -197,7 +197,7 @@ public class CoinKindController extends BaseController {
             CoinResources coinResources4 = FileUtils.saveCoinResource(img4File,imgFilePath4);
             coinResourcesService.insert(coinResources4);
             //设置图片资源guid
-            coinKind.setKindImage(coinResources4.getFileCd());
+            coinKind.setKindImage4(coinResources4.getFileCd());
         }
 
         /*
